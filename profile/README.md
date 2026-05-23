@@ -25,8 +25,8 @@ CUBRID Labs는 CUBRID 데이터베이스를 위한 현대적이고 생산성 높
 
 | Repository | Role | Version | Description | Status |
 |---|---|---|---|---|
-| **[pycubrid](https://github.com/cubrid-labs/pycubrid)** | Driver | v1.2.0 ![beta](https://img.shields.io/badge/-beta-yellow) | Pure Python DB-API 2.0 (PEP 249) driver | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-labs/pycubrid/ci.yml?label=tests)](https://github.com/cubrid-labs/pycubrid/actions) [![PyPI](https://img.shields.io/pypi/v/pycubrid)](https://pypi.org/project/pycubrid) |
-| **[sqlalchemy-cubrid](https://github.com/cubrid-labs/sqlalchemy-cubrid)** | ORM | v1.3.0 ![beta](https://img.shields.io/badge/-beta-yellow) | SQLAlchemy 2.0–2.1 dialect + Alembic | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-labs/sqlalchemy-cubrid/ci.yml?label=tests)](https://github.com/cubrid-labs/sqlalchemy-cubrid/actions) [![PyPI](https://img.shields.io/pypi/v/sqlalchemy-cubrid)](https://pypi.org/project/sqlalchemy-cubrid) |
+| **[pycubrid](https://github.com/cubrid-labs/pycubrid)** | Driver | v1.5.0 ![stable](https://img.shields.io/badge/-stable-brightgreen) | Pure Python DB-API 2.0 (PEP 249) driver — sync + native asyncio, TLS/SSL with STARTTLS | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-labs/pycubrid/ci.yml?label=tests)](https://github.com/cubrid-labs/pycubrid/actions) [![PyPI](https://img.shields.io/pypi/v/pycubrid)](https://pypi.org/project/pycubrid) |
+| **[sqlalchemy-cubrid](https://github.com/cubrid-labs/sqlalchemy-cubrid)** | ORM | v1.5.0 ![stable](https://img.shields.io/badge/-stable-brightgreen) | SQLAlchemy 2.0–2.2 dialect + Alembic | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-labs/sqlalchemy-cubrid/ci.yml?label=tests)](https://github.com/cubrid-labs/sqlalchemy-cubrid/actions) [![PyPI](https://img.shields.io/pypi/v/sqlalchemy-cubrid)](https://pypi.org/project/sqlalchemy-cubrid) |
 
 ### TypeScript / Node.js
 
