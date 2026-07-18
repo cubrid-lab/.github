@@ -1,0 +1,45 @@
+name: link-check
+
+on:
+  workflow_call:
+    inputs:
+      fail-on-error:
+        description: "Fail the job if any link is broken"
+        type: boolean
+        default: true
+      files:
+        description: "File patterns to check (space-separated globs)"
+        type: string
+        default: "*.md docs/**/*.md"
+  schedule:
+    - cron: "0 6 * * 1" # weekly Monday 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run lychee link checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: ${{ inputs.fail-on-error }}
+          args: >-
+            --no-progress
+            --max-concurrency 8
+            --cache
+            --exclude "localhost|127\.0\.0\.1|example\.com"
+            ${{ inputs.files }}
+
+      - name: Create issue on failure (scheduled run only)
+        if: ${{ failure() && github.event_name == 'schedule' }}
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "[automated] Broken links detected by lychee"
+          content-filepath: ./lychee/out.md
+          labels: bug,automated,documentation
