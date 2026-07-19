@@ -1,0 +1,64 @@
+# markdownlint-cli2 configuration for cubrid-lab repositories.
+#
+# Enforces a focused subset of markdownlint rules that catch real rendering
+# issues without being overly opinionated about style.
+#
+# Rules enabled:
+#   MD001  — Heading levels should only increment by one level at a time
+#   MD003  — Heading style (atx: # Heading)
+#   MD009  — Trailing whitespace
+#   MD010  — Hard tabs
+#   MD012  — Multiple consecutive blank lines
+#   MD018  — No space after hash on atx style heading
+#   MD019  — One space after hash on atx style heading
+#   MD022  — Headings should be surrounded by blank lines
+#   MD025  — Multiple top-level headings in the same document
+#   MD031  — Fenced code blocks should be surrounded by blank lines
+#   MD032  — Lists should be surrounded by blank lines
+#   MD040  — Fenced code blocks should have a language specified
+#   MD041  — First line in a file should be a top-level heading
+#   MD042  — No empty links
+#   MD047  — File should end with a single newline
+#   MD051  — Link fragments should be valid
+#
+# Rules explicitly DISABLED:
+#   MD013  — Line length (we don't enforce hard wrapping)
+#   MD033  — Inline HTML (needed for <br/> in mermaid and mkdocs Material)
+#   MD034  — Bare URLs (we use [text](url) style)
+#   MD036  — Emphasis used instead of a heading (too many false positives)
+#   MD046  — Code block style (mixed is fine)
+
+config:
+  MD001: true
+  MD003:
+    style: atx
+  MD009: true
+  MD010: true
+  MD012:
+    maximum: 1
+  MD018: true
+  MD019: true
+  MD022: true
+  MD025: true
+  MD031: true
+  MD032: true
+  MD040: true
+  MD041: true
+  MD042: true
+  MD047: true
+  MD051: true
+  MD013: false
+  MD033: false
+  MD034: false
+  MD036: false
+  MD046: false
+
+# Globs for files to ignore
+ignores:
+  - "node_modules/"
+  - "vendor/"
+  - ".git/"
+  - "typescript/node_modules/"
+
+# Use gitignore if present
+gitignore: true
