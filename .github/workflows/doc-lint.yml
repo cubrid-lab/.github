@@ -1,0 +1,162 @@
+# Reusable documentation linting workflow for cubrid-lab repositories.
+#
+# Validates:
+#   1. Markdown style (markdownlint-cli2)
+#   2. Internal links (lychee — external links checked weekly, not per-PR)
+#   3. Mermaid diagram syntax (custom scanner — catches GitHub rendering issues)
+#
+# Usage in a repository's .github/workflows/ci.yml:
+#
+#   doc-lint:
+#     needs: changes           # or wherever your path filter is
+#     if: needs.changes.outputs.docs == 'true'
+#     uses: cubrid-lab/.github/.github/workflows/doc-lint.yml@main
+#     with:
+#       exclude: "node_modules/,vendor/,typescript/"   # optional
+#       mermaid-scanner-version: "v1"                   # optional, pins scanner
+#
+# The workflow is advisory (continue-on-error) during the initial rollout.
+# After the backlog of existing issues is fixed, flip fail-on-issue to true.
+
+name: Documentation Lint
+
+on:
+  workflow_call:
+    inputs:
+      exclude:
+        description: "Comma-separated paths to exclude from linting"
+        required: false
+        type: string
+        default: "node_modules/,vendor/,.git/,typescript/node_modules/"
+      fail-on-issue:
+        description: "If true, the workflow fails on lint issues. Set to false for advisory mode."
+        required: false
+        type: boolean
+        default: false
+      markdownlint-config:
+        description: "URL or path to markdownlint config. Defaults to the shared org config."
+        required: false
+        type: string
+        default: "https://raw.githubusercontent.com/cubrid-lab/.github/main/workflow-templates/markdownlint.yml"
+      check-external-links:
+        description: "If true, also check external (https://) links. Slow — use in scheduled runs only."
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  markdownlint:
+    name: Markdown style
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ !inputs.fail-on-issue }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install markdownlint-cli2
+        run: npm install -g markdownlint-cli2
+
+      - name: Download shared config
+        run: |
+          curl -fsSL -o .markdownlint-cli2.yaml "${{ inputs.markdownlint-config }}"
+          echo "Downloaded markdownlint config:"
+          cat .markdownlint-cli2.yaml
+
+      - name: Run markdownlint-cli2
+        run: |
+          # Build globs from exclude paths
+          EXCLUDE_ARGS=""
+          IFS=',' read -ra EXCLUDES <<< "${{ inputs.exclude }}"
+          for ex in "${EXCLUDES[@]}"; do
+            EXCLUDE_ARGS="$EXCLUDE_ARGS !./$ex**"
+          done
+
+          markdownlint-cli2 "./*.md" "./**/*.md" $EXCLUDE_ARGS 2>&1 || true
+          echo "::notice::markdownlint complete (advisory mode — issues listed above)"
+
+  lychee:
+    name: Link checker
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ !inputs.fail-on-issue }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ github.run_id }}
+          restore-keys: lychee-cache-
+
+      - name: Run lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --cache
+            --no-progress
+            --exclude-path "${{ inputs.exclude }}"
+            ${{ inputs.check-external-links == false && '--exclude "^https?://"' || '' }}
+            --exclude-mail
+            "./**/*.md"
+          fail: ${{ inputs.fail-on-issue }}
+
+  mermaid:
+    name: Mermaid syntax
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ !inputs.fail-on-issue }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Download mermaid scanner
+        run: |
+          curl -fsSL -o scan_mermaid.py \
+            "https://raw.githubusercontent.com/cubrid-lab/.github/main/workflow-templates/scan_mermaid.py"
+          chmod +x scan_mermaid.py
+          echo "Downloaded mermaid scanner v$(python scan_mermaid.py --version 2>/dev/null || echo '1.0')"
+
+      - name: Build exclude arguments
+        id: excludes
+        run: |
+          EXCLUDE_PATHS=""
+          IFS=',' read -ra EXCLUDES <<< "${{ inputs.exclude }}"
+          for ex in "${EXCLUDES[@]}"; do
+            # Exclude by removing from scan — scanner takes dirs/files as args
+            # We build a find-based exclude list
+            EXCLUDE_PATHS="$EXCLUDE_PATHS --exclude-glob ./$ex**"
+          done
+          echo "exclude-args=$EXCLUDE_PATHS" >> $GITHUB_OUTPUT
+
+      - name: Run mermaid scanner
+        run: |
+          python scan_mermaid.py . ${{ steps.excludes.outputs.exclude-args }}
+        continue-on-error: ${{ !inputs.fail-on-issue }}
+
+  summary:
+    name: Doc lint summary
+    runs-on: ubuntu-latest
+    needs: [markdownlint, lychee, mermaid]
+    if: always()
+    steps:
+      - name: Report
+        run: |
+          echo "## Documentation Lint Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Markdown style | ${{ needs.markdownlint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Link checker | ${{ needs.lychee.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Mermaid syntax | ${{ needs.mermaid.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ inputs.fail-on-issue }}" = "true" ]; then
+            echo "Mode: **blocking** — failures will prevent merge." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Mode: **advisory** — issues reported but won't block." >> $GITHUB_STEP_SUMMARY
+          fi
