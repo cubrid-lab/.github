@@ -1,8 +1,8 @@
 # CUBRID Labs — Ecosystem Roadmap
 
-> **Last updated**: 2026-05-23
+> **Last updated**: 2026-08-24
 >
-> This is the unified roadmap for the cubrid-labs ecosystem.
+> This is the unified roadmap for the cubrid-lab ecosystem.
 > Milestones are authoritative for "next release" scope.
 > This document is authoritative for direction, priorities, and cross-repo dependencies.
 >
@@ -15,14 +15,14 @@
 ```mermaid
 graph TD
     subgraph Drivers["🔌 Drivers"]
-        pycubrid["pycubrid (Python)\nv1.5.0"]
+        pycubrid["pycubrid (Python)\nv1.6.2"]
         cubrid_client["cubrid-client (TypeScript)\nv1.1.0"]
         cubrid_go["cubrid-go (Go)\nv0.2.1"]
         cubrid_rs["cubrid-rs (Rust)\nv0.1.0"]
     end
 
     subgraph ORMs["🏗️ ORMs & Dialects"]
-        sqlalchemy["sqlalchemy-cubrid\nv1.5.0"]
+        sqlalchemy["sqlalchemy-cubrid\nv1.6.0"]
         drizzle["drizzle-cubrid\nv0.2.1"]
         gorm["gorm-cubrid\nv0.1.0"]
         sea_orm["sea-orm-cubrid\nv0.1.0"]
@@ -133,7 +133,7 @@ graph LR
 | **cubrid-rs** | [v1.0.0](https://github.com/cubrid-lab/cubrid-rs/milestone/2) | Stable release | [Milestones](https://github.com/cubrid-lab/cubrid-rs/milestones) |
 | **sea-orm-cubrid** | [v1.0.0](https://github.com/cubrid-lab/sea-orm-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/sea-orm-cubrid/milestones) |
 | **cubrid-cookbook-python** | ✅ Complete | 55+ recipes, tested CUBRID 11.2+11.4 | [Repo](https://github.com/cubrid-lab/cubrid-cookbook-python) |
-| **cubrid-benchmark** | [v1.0](https://github.com/cubrid-labs/cubrid-benchmark/milestone/1) | Comprehensive benchmarks | [Milestones](https://github.com/cubrid-labs/cubrid-benchmark/milestones) |
+| **cubrid-benchmark** | [v1.0](https://github.com/cubrid-lab/cubrid-benchmark/milestone/1) | Comprehensive benchmarks | [Milestones](https://github.com/cubrid-lab/cubrid-benchmark/milestones) |
 
 ---
 
@@ -142,9 +142,9 @@ graph LR
 We welcome contributions to any repo in the ecosystem!
 
 - 🐛 **Found a bug?** Open an issue on the relevant repo
-- 💡 **Have a feature idea?** Start a [Discussion](https://github.com/orgs/cubrid-labs/discussions)
+- 💡 **Have a feature idea?** Start a [Discussion](https://github.com/orgs/cubrid-lab/discussions)
 - 🔧 **Want to contribute code?** See [CONTRIBUTING.md](CONTRIBUTING.md) and look for `good first issue` labels
-- 📋 **Track progress**: [Org Project Board](https://github.com/orgs/cubrid-labs/projects/2)
+- 📋 **Track progress**: [Org Project Board](https://github.com/orgs/cubrid-lab/projects/2)
 
 ---
 

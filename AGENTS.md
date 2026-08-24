@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## Purpose
-This repository holds organization-wide community health files for `cubrid-labs`.
+This repository holds organization-wide community health files for `cubrid-lab`.
 
 ## Read First
 - `README.md`
@@ -16,9 +16,9 @@ This repository holds organization-wide community health files for `cubrid-labs`
 - When behavior or policy changes, update every affected document in the same change.
 - Prefer small edits that preserve existing wording unless a policy change is intentional.
 
-## Development Workflow (cubrid-labs org standard)
+## Development Workflow (cubrid-lab org standard)
 
-All non-trivial work across cubrid-labs repositories MUST follow this 4-phase cycle:
+All non-trivial work across cubrid-lab repositories MUST follow this 4-phase cycle:
 
 1. **Oracle Design Review** — Consult Oracle before implementation to validate architecture, API surface, and approach. Raise concerns early.
 2. **Implementation** — Build the feature/fix with tests. Follow existing codebase patterns.
@@ -33,7 +33,7 @@ Skipping any phase requires explicit justification. Trivial changes (typos, sing
 
 ## Project Context — Performance Loop System
 
-> **Board**: [CUBRID Ecosystem Roadmap](https://github.com/orgs/cubrid-labs/projects/2)
+> **Board**: [CUBRID Ecosystem Roadmap](https://github.com/orgs/cubrid-lab/projects/2)
 
 ### What This Is
 
