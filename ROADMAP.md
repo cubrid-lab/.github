@@ -2,7 +2,7 @@
 
 > **Last updated**: 2026-08-24
 >
-> This is the unified roadmap for the cubrid-labs ecosystem.
+> This is the unified roadmap for the cubrid-lab ecosystem.
 > Milestones are authoritative for "next release" scope.
 > This document is authoritative for direction, priorities, and cross-repo dependencies.
 >
