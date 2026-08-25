@@ -90,7 +90,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](../.github/CONTRIBUTING.m
 - 💬 Questions? Post in [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions)
 - 🐛 Found a bug? Open an issue on the relevant repo
 - 📝 Have an idea? Start a [Discussion](https://github.com/orgs/cubrid-lab/discussions)
-- 📋 Track progress: [Project Board](https://github.com/orgs/cubrid-lab/projects/2)
+- 📋 Track progress: [Project Board](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only)
 
 ---
 

@@ -36,4 +36,4 @@ This Code of Conduct is adapted from the [Contributor Covenant](https://www.cont
 
 ---
 
-**Questions?** Post in [GitHub Discussions](https://github.com/orgs/cubrid-labs/discussions) or contact the maintainers.
+**Questions?** Post in [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions) or contact the maintainers.
