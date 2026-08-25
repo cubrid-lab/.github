@@ -30,7 +30,7 @@ Thank you for your interest in contributing to CUBRID Labs! We welcome contribut
 
 ### Discussions
 
-Use [GitHub Discussions](https://github.com/orgs/cubrid-labs/discussions) for:
+Use [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions) for:
 - Questions about usage
 - Design proposals
 - Architecture discussions
@@ -127,7 +127,7 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. We 
 ---
 
 **Questions?**
-- 💬 Post in [GitHub Discussions](https://github.com/orgs/cubrid-labs/discussions)
+- 💬 Post in [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions)
 - 📧 Contact maintainers via the issue tracker
 
 Thank you for contributing to CUBRID Labs!

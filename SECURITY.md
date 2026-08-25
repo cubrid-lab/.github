@@ -55,4 +55,4 @@ We appreciate responsible security disclosures and will credit researchers in se
 
 ---
 
-**Questions about security?** Post in [GitHub Discussions](https://github.com/orgs/cubrid-labs/discussions/categories/security) or email the maintainers.
+**Questions about security?** Post in [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions/categories/security) or email the maintainers.

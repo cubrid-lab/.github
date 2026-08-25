@@ -1,12 +1,12 @@
 # CUBRID Labs — Ecosystem Roadmap
 
-> **Last updated**: 2026-05-23
+> **Last updated**: 2026-08-25
 >
-> This is the unified roadmap for the cubrid-labs ecosystem.
+> This is the unified roadmap for the cubrid-lab ecosystem.
 > Milestones are authoritative for "next release" scope.
 > This document is authoritative for direction, priorities, and cross-repo dependencies.
 >
-> 📋 [**Org Project Board**](https://github.com/orgs/cubrid-lab/projects/2) · See [individual repo milestones](#release-focus-by-repo) for execution details.
+> 📋 [**Org Project Board**](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only) · See [individual repo milestones](#release-focus-by-repo) for execution details.
 
 ---
 
@@ -15,14 +15,14 @@
 ```mermaid
 graph TD
     subgraph Drivers["🔌 Drivers"]
-        pycubrid["pycubrid (Python)\nv1.5.0"]
+        pycubrid["pycubrid (Python)\nv1.6.2"]
         cubrid_client["cubrid-client (TypeScript)\nv1.1.0"]
         cubrid_go["cubrid-go (Go)\nv0.2.1"]
         cubrid_rs["cubrid-rs (Rust)\nv0.1.0"]
     end
 
     subgraph ORMs["🏗️ ORMs & Dialects"]
-        sqlalchemy["sqlalchemy-cubrid\nv1.5.0"]
+        sqlalchemy["sqlalchemy-cubrid\nv1.6.0"]
         drizzle["drizzle-cubrid\nv0.2.1"]
         gorm["gorm-cubrid\nv0.1.0"]
         sea_orm["sea-orm-cubrid\nv0.1.0"]
@@ -55,8 +55,8 @@ graph TD
 
 ### 🟢 Now (Current Focus)
 
-- **cubrid-cookbook-python ✅ COMPLETE** — 55+ production-ready recipes (pycubrid, SQLAlchemy, Pandas, Flask, FastAPI, Streamlit, Django). Tested on CUBRID 11.2 + 11.4. [Support Matrix](https://github.com/cubrid-lab/cubrid-cookbook-python/blob/main/SUPPORT_MATRIX.md)
-- **Python driver improvements** — pycubrid v1.5.0 (async TLS hardening with STARTTLS, transport contract lock — session restore + mid-fetch reconnect handling, Python 3.10 async-TLS preflight verification probe, 1.x release policy with `compat-check` CI gate); sqlalchemy-cubrid v1.5.0 (SQLAlchemy 2.1/2.2 forward-compat shims — `update_post_criteria_clause`, `Float` numeric affinity, async `await_` staticmethod; async integration stability)
+- **cubrid-cookbook-python ✅ COMPLETE** — 62 production-ready recipes (pycubrid, SQLAlchemy, Pandas, Flask, FastAPI, Streamlit, Django). Tested in CI on CUBRID 11.2 only (11.4 expected, not yet in CI). [Support Matrix](https://github.com/cubrid-lab/cubrid-cookbook-python/blob/main/SUPPORT_MATRIX.md)
+- **Python driver improvements** — pycubrid current **v1.6.2**, sqlalchemy-cubrid current **v1.6.0**. Recent shipped baseline: pycubrid v1.5.0 delivered (async TLS hardening with STARTTLS, transport contract lock — session restore + mid-fetch reconnect handling, Python 3.10 async-TLS preflight verification probe, 1.x release policy with `compat-check` CI gate); sqlalchemy-cubrid v1.5.0 delivered (SQLAlchemy 2.1/2.2 forward-compat shims — `update_post_criteria_clause`, `Float` numeric affinity, async `await_` staticmethod; async integration stability)
 - **Performance profiling & optimization** — Python driver optimized (19% fetch improvement); query compilation cache added to sqlalchemy-cubrid. Ongoing: further gap reduction vs MySQL.
 - **Benchmark automation** — Nightly CI runs with extended workloads (connect/disconnect, prepared statements, batch insert, concurrent select)
 - **cubrid-rs protocol completion** — Broker handshake, authentication, query execution (v0.2.0)
@@ -121,9 +121,9 @@ graph LR
 
 | Repo | Next Milestone | Focus | Link |
 |------|---------------|-------|------|
-| **pycubrid** | v1.5.0 ✅ | Async TLS hardening (STARTTLS, Py3.10 preflight probe), transport contract lock, 1.x release policy with `compat-check` CI gate | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
+| **pycubrid** | v1.6.2 ✅ | v1.5.0 baseline: Async TLS hardening (STARTTLS, Py3.10 preflight probe), transport contract lock, 1.x release policy with `compat-check` CI gate | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
 | **pycubrid** | [v2.0.0](https://github.com/cubrid-lab/pycubrid/milestone/1) | Next major — connection pooling, breaking changes deferred from 1.x | [Milestones](https://github.com/cubrid-lab/pycubrid/milestones) |
-| **sqlalchemy-cubrid** | v1.5.0 ✅ | SQLAlchemy 2.1/2.2 forward-compat shims, async integration stability, `sqlalchemy-22-canary` job promoted to gating | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
+| **sqlalchemy-cubrid** | v1.6.0 ✅ | v1.5.0 baseline: SQLAlchemy 2.1/2.2 forward-compat shims, async integration stability, `sqlalchemy-22-canary` job promoted to gating | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
 | **sqlalchemy-cubrid** | [v2.0.0](https://github.com/cubrid-lab/sqlalchemy-cubrid/milestone/2) | SA 2.2 full GA support, JSON type mapping | [Milestones](https://github.com/cubrid-lab/sqlalchemy-cubrid/milestones) |
 | **cubrid-client** | [v1.2.0](https://github.com/cubrid-lab/cubrid-client/milestone/1) | Reliability & performance | [Milestones](https://github.com/cubrid-lab/cubrid-client/milestones) |
 | **drizzle-cubrid** | [v1.0.0](https://github.com/cubrid-lab/drizzle-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/drizzle-cubrid/milestones) |
@@ -132,8 +132,8 @@ graph LR
 | **cubrid-rs** | [v0.2.0](https://github.com/cubrid-lab/cubrid-rs/milestone/1) | Protocol completeness | [Milestones](https://github.com/cubrid-lab/cubrid-rs/milestones) |
 | **cubrid-rs** | [v1.0.0](https://github.com/cubrid-lab/cubrid-rs/milestone/2) | Stable release | [Milestones](https://github.com/cubrid-lab/cubrid-rs/milestones) |
 | **sea-orm-cubrid** | [v1.0.0](https://github.com/cubrid-lab/sea-orm-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/sea-orm-cubrid/milestones) |
-| **cubrid-cookbook-python** | ✅ Complete | 55+ recipes, tested CUBRID 11.2+11.4 | [Repo](https://github.com/cubrid-lab/cubrid-cookbook-python) |
-| **cubrid-benchmark** | [v1.0](https://github.com/cubrid-labs/cubrid-benchmark/milestone/1) | Comprehensive benchmarks | [Milestones](https://github.com/cubrid-labs/cubrid-benchmark/milestones) |
+| **cubrid-cookbook-python** | ✅ Complete | 62 recipes, CI-tested CUBRID 11.2 only (11.4 expected, not in CI) | [Repo](https://github.com/cubrid-lab/cubrid-cookbook-python) |
+| **cubrid-benchmark** | [v1.0](https://github.com/cubrid-lab/cubrid-benchmark/milestone/1) | Comprehensive benchmarks | [Milestones](https://github.com/cubrid-lab/cubrid-benchmark/milestones) |
 
 ---
 
@@ -142,9 +142,9 @@ graph LR
 We welcome contributions to any repo in the ecosystem!
 
 - 🐛 **Found a bug?** Open an issue on the relevant repo
-- 💡 **Have a feature idea?** Start a [Discussion](https://github.com/orgs/cubrid-labs/discussions)
+- 💡 **Have a feature idea?** Start a [Discussion](https://github.com/orgs/cubrid-lab/discussions)
 - 🔧 **Want to contribute code?** See [CONTRIBUTING.md](CONTRIBUTING.md) and look for `good first issue` labels
-- 📋 **Track progress**: [Org Project Board](https://github.com/orgs/cubrid-labs/projects/2)
+- 📋 **Track progress**: [Org Project Board](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only)
 
 ---
 
