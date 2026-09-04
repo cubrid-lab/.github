@@ -15,14 +15,14 @@
 ```mermaid
 graph TD
     subgraph Drivers["🔌 Drivers"]
-        pycubrid["pycubrid (Python)\nv1.6.2"]
+        pycubrid["pycubrid (Python)\nv1.7.0"]
         cubrid_client["cubrid-client (TypeScript)\nv1.1.0"]
         cubrid_go["cubrid-go (Go)\nv0.2.1"]
         cubrid_rs["cubrid-rs (Rust)\nv0.1.0"]
     end
 
     subgraph ORMs["🏗️ ORMs & Dialects"]
-        sqlalchemy["sqlalchemy-cubrid\nv1.6.0"]
+        sqlalchemy["sqlalchemy-cubrid\nv1.7.0"]
         drizzle["drizzle-cubrid\nv0.2.1"]
         gorm["gorm-cubrid\nv0.1.0"]
         sea_orm["sea-orm-cubrid\nv0.1.0"]
@@ -56,7 +56,7 @@ graph TD
 ### 🟢 Now (Current Focus)
 
 - **cubrid-cookbook-python ✅ COMPLETE** — 62 production-ready recipes (pycubrid, SQLAlchemy, Pandas, Flask, FastAPI, Streamlit, Django). Tested in CI on CUBRID 11.2 only (11.4 expected, not yet in CI). [Support Matrix](https://github.com/cubrid-lab/cubrid-cookbook-python/blob/main/SUPPORT_MATRIX.md)
-- **Python driver improvements** — pycubrid current **v1.6.2**, sqlalchemy-cubrid current **v1.6.0**. Recent shipped baseline: pycubrid v1.5.0 delivered (async TLS hardening with STARTTLS, transport contract lock — session restore + mid-fetch reconnect handling, Python 3.10 async-TLS preflight verification probe, 1.x release policy with `compat-check` CI gate); sqlalchemy-cubrid v1.5.0 delivered (SQLAlchemy 2.1/2.2 forward-compat shims — `update_post_criteria_clause`, `Float` numeric affinity, async `await_` staticmethod; async integration stability)
+- **Python driver improvements** — pycubrid current **v1.7.0**, sqlalchemy-cubrid current **v1.7.0**. Recent shipped baseline: pycubrid v1.5.0 delivered (async TLS hardening with STARTTLS, transport contract lock — session restore + mid-fetch reconnect handling, Python 3.10 async-TLS preflight verification probe, 1.x release policy with `compat-check` CI gate); sqlalchemy-cubrid v1.5.0 delivered (SQLAlchemy 2.1/2.2 forward-compat shims — `update_post_criteria_clause`, `Float` numeric affinity, async `await_` staticmethod; async integration stability)
 - **Performance profiling & optimization** — Python driver optimized (19% fetch improvement); query compilation cache added to sqlalchemy-cubrid. Ongoing: further gap reduction vs MySQL.
 - **Benchmark automation** — Nightly CI runs with extended workloads (connect/disconnect, prepared statements, batch insert, concurrent select)
 - **cubrid-rs protocol completion** — Broker handshake, authentication, query execution (v0.2.0)
@@ -121,9 +121,9 @@ graph LR
 
 | Repo | Next Milestone | Focus | Link |
 |------|---------------|-------|------|
-| **pycubrid** | v1.6.2 ✅ | v1.5.0 baseline: Async TLS hardening (STARTTLS, Py3.10 preflight probe), transport contract lock, 1.x release policy with `compat-check` CI gate | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
+| **pycubrid** | v1.7.0 ✅ | v1.5.0 baseline: Async TLS hardening (STARTTLS, Py3.10 preflight probe), transport contract lock, 1.x release policy with `compat-check` CI gate | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
 | **pycubrid** | [v2.0.0](https://github.com/cubrid-lab/pycubrid/milestone/1) | Next major — connection pooling, breaking changes deferred from 1.x | [Milestones](https://github.com/cubrid-lab/pycubrid/milestones) |
-| **sqlalchemy-cubrid** | v1.6.0 ✅ | v1.5.0 baseline: SQLAlchemy 2.1/2.2 forward-compat shims, async integration stability, `sqlalchemy-22-canary` job promoted to gating | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
+| **sqlalchemy-cubrid** | v1.7.0 ✅ | v1.5.0 baseline: SQLAlchemy 2.1/2.2 forward-compat shims, async integration stability, `sqlalchemy-22-canary` job promoted to gating | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
 | **sqlalchemy-cubrid** | [v2.0.0](https://github.com/cubrid-lab/sqlalchemy-cubrid/milestone/2) | SA 2.2 full GA support, JSON type mapping | [Milestones](https://github.com/cubrid-lab/sqlalchemy-cubrid/milestones) |
 | **cubrid-client** | [v1.2.0](https://github.com/cubrid-lab/cubrid-client/milestone/1) | Reliability & performance | [Milestones](https://github.com/cubrid-lab/cubrid-client/milestones) |
 | **drizzle-cubrid** | [v1.0.0](https://github.com/cubrid-lab/drizzle-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/drizzle-cubrid/milestones) |
