@@ -47,7 +47,8 @@ benchmark → profile → optimize driver/ORM → re-benchmark → CI-verified r
 | `cubrid-benchmark` | Benchmark suite (Python/TS/Go × CUBRID/MySQL) | Tier 0+1+Extended, CI, GitHub Pages — **most mature** |
 | `pycubrid` | Python driver (PEP 249) | v1.7.0, published PyPI — **stable 1.x, async TLS + STARTTLS hardening, transport contract lock, 1.x compat-check CI gate; 2 perf cycles complete, 19% fetch improvement** |
 | `sqlalchemy-cubrid` | SQLAlchemy 2.0–2.2 dialect | v1.7.0, published PyPI — **stable 1.x, SQLAlchemy 2.1/2.2 forward-compat shims, async integration stability; query compilation optimized** |
-| `cubrid-cookbook` | Runnable examples across all languages | Broad coverage — **expected outputs not standardized** |
+| `cubrid-mcp-server` | MCP server (LLM ↔ CUBRID) | v0.4.0, GitHub Release shipped (PyPI publish pending trusted-publisher registration #154) — **12 tools, read-only whitelist + opt-in write mode, multi-connection, audit log, docs site live** |
+| `cubrid-cookbook` | Runnable examples across all languages | Python: **68 examples, 45 CI golden-verified on CUBRID 11.2 + 11.4**, one-command dashboard template; other languages planned |
 
 ### Supporting Repos
 

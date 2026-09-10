@@ -55,7 +55,7 @@ graph TD
 
 ### 🟢 Now (Current Focus)
 
-- **cubrid-cookbook-python ✅ COMPLETE** — 62 production-ready recipes (pycubrid, SQLAlchemy, Pandas, Flask, FastAPI, Streamlit, Django). Tested in CI on CUBRID 11.2 only (11.4 expected, not yet in CI). [Support Matrix](https://github.com/cubrid-lab/cubrid-cookbook-python/blob/main/SUPPORT_MATRIX.md)
+- **cubrid-cookbook-python ✅ COMPLETE** — 68 production-ready examples (pycubrid, SQLAlchemy, Pandas, Flask, FastAPI, Streamlit, Django, Celery); 45 of them golden-verified in CI on a **CUBRID 11.2 + 11.4 matrix**, plus a one-command dashboard demo template. [Support Matrix](https://github.com/cubrid-lab/cubrid-cookbook-python/blob/main/SUPPORT_MATRIX.md)
 - **Python driver improvements** — pycubrid current **v1.7.0**, sqlalchemy-cubrid current **v1.7.0**. Recent shipped baseline: pycubrid v1.5.0 delivered (async TLS hardening with STARTTLS, transport contract lock — session restore + mid-fetch reconnect handling, Python 3.10 async-TLS preflight verification probe, 1.x release policy with `compat-check` CI gate); sqlalchemy-cubrid v1.5.0 delivered (SQLAlchemy 2.1/2.2 forward-compat shims — `update_post_criteria_clause`, `Float` numeric affinity, async `await_` staticmethod; async integration stability)
 - **Performance profiling & optimization** — Python driver optimized (19% fetch improvement); query compilation cache added to sqlalchemy-cubrid. Ongoing: further gap reduction vs MySQL.
 - **Benchmark automation** — Nightly CI runs with extended workloads (connect/disconnect, prepared statements, batch insert, concurrent select)
@@ -66,7 +66,7 @@ graph TD
 - **Language-specific cookbooks** — TypeScript (cubrid-cookbook-typescript), Go (cubrid-cookbook-go), Rust (cubrid-cookbook-rust) following the Python cookbook pattern
 - **v1.0 stabilization** — API freeze for cubrid-go, gorm-cubrid, drizzle-cubrid
 - **Connection resilience** — Retry policies, connection health checks (cubrid-client v1.2.0)
-- **Registry publishing** — crates.io (cubrid-rs, sea-orm-cubrid); PyPI Trusted Publisher configured ✅ (pycubrid v1.5.0, sqlalchemy-cubrid v1.5.0 published)
+- **Registry publishing** — crates.io (cubrid-rs, sea-orm-cubrid); PyPI Trusted Publisher configured ✅ (pycubrid v1.7.0, sqlalchemy-cubrid v1.7.0 published); cubrid-mcp-server v0.4.0 GitHub Release shipped, PyPI publish pending Pending-Publisher registration (#154)
 
 ### 🔵 Later (3–6 Months)
 
@@ -132,7 +132,8 @@ graph LR
 | **cubrid-rs** | [v0.2.0](https://github.com/cubrid-lab/cubrid-rs/milestone/1) | Protocol completeness | [Milestones](https://github.com/cubrid-lab/cubrid-rs/milestones) |
 | **cubrid-rs** | [v1.0.0](https://github.com/cubrid-lab/cubrid-rs/milestone/2) | Stable release | [Milestones](https://github.com/cubrid-lab/cubrid-rs/milestones) |
 | **sea-orm-cubrid** | [v1.0.0](https://github.com/cubrid-lab/sea-orm-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/sea-orm-cubrid/milestones) |
-| **cubrid-cookbook-python** | ✅ Complete | 62 recipes, CI-tested CUBRID 11.2 only (11.4 expected, not in CI) | [Repo](https://github.com/cubrid-lab/cubrid-cookbook-python) |
+| **cubrid-cookbook-python** | ✅ Complete | 68 examples, 45 CI golden-verified on CUBRID 11.2 + 11.4 matrix | [Repo](https://github.com/cubrid-lab/cubrid-cookbook-python) |
+| **cubrid-mcp-server** | v0.4.0 ✅ | First PyPI release — Beta status, docs site, SBOM on release assets; PyPI publish blocked on Pending-Publisher registration (#154) | [Releases](https://github.com/cubrid-lab/cubrid-mcp-server/releases) |
 | **cubrid-benchmark** | [v1.0](https://github.com/cubrid-lab/cubrid-benchmark/milestone/1) | Comprehensive benchmarks | [Milestones](https://github.com/cubrid-lab/cubrid-benchmark/milestones) |
 
 ---
