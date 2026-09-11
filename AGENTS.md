@@ -50,6 +50,15 @@ benchmark → profile → optimize driver/ORM → re-benchmark → CI-verified r
 | `cubrid-mcp-server` | MCP server (LLM ↔ CUBRID) | v0.4.0, GitHub Release shipped (PyPI publish pending trusted-publisher registration #154) — **12 tools, read-only whitelist + opt-in write mode, multi-connection, audit log, docs site live** |
 | `cubrid-cookbook` | Runnable examples across all languages | Python: **68 examples, 45 CI golden-verified on CUBRID 11.2 + 11.4**, one-command dashboard template; other languages planned |
 
+## Translation Policy (cubrid-lab org)
+
+English is canonical. 한국어 (`docs/README.ko.md`) is **required-to-sync** — a PR
+changing `README.md` without it fails the `translation-sync` check (escape hatch:
+`translations-deferred` label). Other languages (de/hi/ru/zh) are community
+translations: drift emits a warning only; maintainers' AI agent opens resync PRs.
+This hard gate is time-boxed for the 2026 contest finals and should be relaxed to
+advisory afterwards (see the reminder issue).
+
 ### Supporting Repos
 
 `cubrid-client` (TS, v1.1.0), `cubrid-go`, `cubrid-rs`, `drizzle-cubrid`, `gorm-cubrid`, `sea-orm-cubrid`
