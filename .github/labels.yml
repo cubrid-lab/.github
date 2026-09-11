@@ -1,0 +1,96 @@
+# Source of truth for cubrid-lab repo labels.
+# Sync with: python scripts/sync_labels.py            (apply core + repo areas)
+# Audit with: python scripts/sync_labels.py --audit  (report drift, change nothing)
+#
+# Rules (Oracle-reviewed 2026-09): lowercase, spaced-colon prefixes
+# (`priority: high`, `size: S`, `area: packaging`), quotes required in
+# GitHub search/CLI (`label:"priority: high"`). Workflow escape-hatch labels
+# share one color. Repo-specific domain labels live under `area:` only.
+
+core:
+  # type
+  - {name: bug, color: d73a4a, description: Something isn't working}
+  - {name: enhancement, color: a2eeef, description: New feature or request}
+  - {name: documentation, color: 0075ca, description: Improvements or additions to documentation}
+  - {name: testing, color: c5def5, description: Test coverage or test fixes}
+  - {name: ci, color: "5319e7", description: CI/CD workflow changes}
+  - {name: github-actions, color: "5319e7", description: GitHub Actions workflows and labels automation (used by Dependabot)}
+  - {name: dependencies, color: "0366d6", description: Dependency updates}
+  - {name: security, color: b60205, description: Security-relevant change or report}
+  - {name: performance, color: fbca04, description: Performance improvement}
+  - {name: chore, color: cfd3d7, description: Maintenance work}
+  - {name: question, color: d876e3, description: Further information is requested}
+  # priority
+  - {name: "priority: critical", color: b60205, description: Drop everything; release-blocker or data-loss risk}
+  - {name: "priority: high", color: d93f0b, description: Should be fixed soon}
+  - {name: "priority: medium", color: fbca04, description: Normal queue}
+  - {name: "priority: low", color: "0e8a16", description: Nice to have}
+  # size
+  - {name: "size: XS", color: c2e0c6, description: Trivial change (< ~10 lines)}
+  - {name: "size: S", color: 7bc96f, description: Small change}
+  - {name: "size: M", color: fef2c0, description: Medium change}
+  - {name: "size: L", color: f9d0c4, description: Large change}
+  - {name: "size: XL", color: e99695, description: Very large change; consider splitting}
+  # status
+  - {name: "status: needs triage", color: fef2c0, description: Not yet looked at by a maintainer}
+  - {name: "status: needs info", color: d876e3, description: Waiting on the reporter's reply}
+  # resolution
+  - {name: duplicate, color: cfd3d7, description: This issue or pull request already exists}
+  - {name: invalid, color: e4e669, description: This doesn't seem right}
+  - {name: wontfix, color: ffffff, description: This will not be worked on}
+  - {name: stale, color: cfd3d7, description: No activity recently; the stale bot may close it}
+  # workflow gates — one shared color, hyphenated names
+  - {name: docs-not-needed, color: bfdadc, description: PR intentionally has no docs impact (docs-sync escape hatch)}
+  - {name: translations-deferred, color: bfdadc, description: Translation follow-up accepted later (translation-sync escape hatch)}
+  # community — promises, applied by maintainers only
+  - {name: good first issue, color: "7057ff", description: Small, scoped, has acceptance criteria; maintainers will mentor}
+  - {name: help wanted, color: "008672", description: Maintainers welcome an external PR and will answer questions}
+  # source
+  - {name: automated, color: e4e669, description: Created or mostly authored by a bot/agent}
+
+# Legacy labels to rename away (applied before the core sync).
+renames:
+  "priority:P0": "priority: critical"
+  "priority:P1": "priority: high"
+  "priority:P2": "priority: medium"
+  "size:S": "size: S"
+
+# Repo-specific area labels (repo-optional by design; keep the list short).
+repos:
+  sqlalchemy-cubrid:
+    areas:
+      - {name: "area: alembic", color: "0052cc", description: Alembic migration support}
+      - {name: "area: async", color: "0052cc", description: Async engine/dialect support}
+      - {name: "area: compatibility", color: "0052cc", description: SQLAlchemy version compatibility}
+      - {name: "area: compiler", color: "0052cc", description: SQL compilation}
+      - {name: "area: dialect", color: "0052cc", description: Dialect core (was CubridDialect)}
+      - {name: "area: type compiler", color: "0052cc", description: Type compilation (was CubridTypeCompiler)}
+      - {name: "area: devx", color: "0052cc", description: Developer experience}
+      - {name: "area: observability", color: "0052cc", description: Logging/diagnostics}
+      - {name: "area: packaging", color: "0052cc", description: Packaging and distribution}
+      - {name: "area: reflection", color: "0052cc", description: Schema reflection}
+    area_renames:
+      CubridDialect: "area: dialect"
+      CubridTypeCompiler: "area: type compiler"
+      alembic: "area: alembic"
+      async: "area: async"
+      compatibility: "area: compatibility"
+      compiler: "area: compiler"
+      devx: "area: devx"
+      observability: "area: observability"
+      packaging: "area: packaging"
+      reflection: "area: reflection"
+  pycubrid:
+    areas:
+      - {name: badges, color: cfd3d7, description: README badge upkeep (badge-sync workflow)}
+      - {name: "area: driver", color: "0052cc", description: Driver core (connection/cursor)}
+      - {name: "area: protocol", color: "0052cc", description: CAS wire protocol}
+      - {name: "area: aio", color: "0052cc", description: asyncio support (pycubrid.aio)}
+  cubrid-mcp-server:
+    areas:
+      - {name: "area: tools", color: "0052cc", description: MCP tools surface}
+      - {name: "area: security", color: "0052cc", description: Whitelist/write-mode/audit model}
+  cubrid-cookbook-python:
+    areas:
+      - {name: "area: templates", color: "0052cc", description: Application templates}
+      - {name: "area: recipes", color: "0052cc", description: fundamentals/performance/pitfalls recipes}

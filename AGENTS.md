@@ -59,6 +59,16 @@ translations: drift emits a warning only; maintainers' AI agent opens resync PRs
 This hard gate is time-boxed for the 2026 contest finals and should be relaxed to
 advisory afterwards (see the reminder issue).
 
+## Label Rules (cubrid-lab org)
+
+Source of truth: [`.github/labels.yml`](.github/labels.yml) — sync with
+`python scripts/sync_labels.py`, drift reported weekly by `label-audit`.
+Naming: lowercase, spaced-colon prefixes (`priority: high`, `size: S`,
+`area: packaging`). Escape-hatch labels (`docs-not-needed`,
+`translations-deferred`) share one color. `good first issue` and
+`help wanted` are maintainer promises (scoping + mentoring), never
+auto-applied. Domain labels are repo-optional `area: ...` only.
+
 ### Supporting Repos
 
 `cubrid-client` (TS, v1.1.0), `cubrid-go`, `cubrid-rs`, `drizzle-cubrid`, `gorm-cubrid`, `sea-orm-cubrid`

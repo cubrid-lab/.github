@@ -131,3 +131,15 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. We 
 - 📧 Contact maintainers via the issue tracker
 
 Thank you for contributing to CUBRID Labs!
+
+## Finding Work (labels)
+
+| Label | Meaning |
+|---|---|
+| `good first issue` | Small, scoped, acceptance criteria written — maintainers will mentor |
+| `help wanted` | Maintainers welcome an external PR and will answer questions |
+| `size: XS`–`XL` | Expected change size |
+| `area: ...` | Repo-specific domain (e.g. `area: async`) |
+| `bug` / `enhancement` / `documentation` | Work type (auto-applied by issue templates) |
+
+The full org label scheme lives in [`.github/labels.yml`](.github/labels.yml).
