@@ -43,7 +43,7 @@ Check the README and docs directory in each repository for:
 | **drizzle-cubrid** | [Docs](https://orm.drizzle.team) |
 | **cubrid-go** | [pkg.go.dev](https://pkg.go.dev/github.com/cubrid-lab/cubrid-go) |
 | **gorm-cubrid** | [GORM Docs](https://gorm.io) |
-| **cubrid-cookbook** | [Examples](https://github.com/cubrid-lab/cubrid-cookbook) |
+| **cubrid-cookbook** | [Examples](https://github.com/cubrid-lab/cubrid-cookbook-python) |
 
 ## Response Times
 
