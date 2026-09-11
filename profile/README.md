@@ -123,3 +123,5 @@ Made with ❤️ by the CUBRID Lab team
 [GitHub](https://github.com/cubrid-lab) • [Discussions](https://github.com/orgs/cubrid-lab/discussions)
 
 </div>
+
+Maintainer-facing conventions (releases, CI gates, docs, labels): [docs/OPERATIONS.md](https://github.com/cubrid-lab/.github/blob/main/docs/OPERATIONS.md).
