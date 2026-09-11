@@ -71,7 +71,7 @@ CUBRID Lab은 CUBRID 데이터베이스를 위한 현대적이고 생산성 높�
 
 See the **[Ecosystem Roadmap](https://github.com/cubrid-lab/.github/blob/main/ROADMAP.md)** for cross-repo priorities and timeline.
 
-Track execution on the **[Project Board](https://github.com/orgs/cubrid-lab/projects/2)**.
+Track execution per-repo via the [milestones linked in ROADMAP.md](https://github.com/cubrid-lab/.github/blob/main/ROADMAP.md#release-focus-by-repo).
 
 ---
 
