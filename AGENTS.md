@@ -59,6 +59,12 @@ translations: drift emits a warning only; maintainers' AI agent opens resync PRs
 This hard gate is time-boxed for the 2026 contest finals and should be relaxed to
 advisory afterwards (see the reminder issue).
 
+## Operations Manual
+
+Releases, docs sites, CI gates, secrets, and the gotchas behind them:
+[docs/OPERATIONS.md](docs/OPERATIONS.md). Update it in the same PR that
+changes any release/docs/CI convention.
+
 ## Label Rules (cubrid-lab org)
 
 Source of truth: [`.github/labels.yml`](.github/labels.yml) — sync with
