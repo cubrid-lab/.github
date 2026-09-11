@@ -1,0 +1,32 @@
+name: label-audit
+
+# Weekly drift report: labels that exist in a cubrid-lab repo but are not in
+# .github/labels.yml (or vice versa). Read-only — deletion stays a human call.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Report label drift across cubrid-lab repos
+        env:
+          GH_TOKEN: ${{ secrets.LABEL_AUDIT_TOKEN }}
+        run: |
+          {
+            echo '### Label drift report'
+            echo '```'
+            python scripts/sync_labels.py --audit || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
