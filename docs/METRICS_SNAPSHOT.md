@@ -45,6 +45,16 @@ cubrid-mcp-server v0.4.0 (GitHub Release 게시 완료)
   → AI 에이전트 템플릿 5종 (cookbook templates/ai-agent/)
 ```
 
+## ⚠️ PyPI 다운로드 오염 주의 (#39)
+
+자체 CI(cookbook smoke-test · pycubrid/sqlalchemy 통합테스트)가 `pip install`을 실행하므로
+PyPI 다운로드 수에는 일 20~50회의 자체 트래픽이 포함됨.
+
+**발표 시:**
+- GitHub 클론 유니크 647명 ← ✅ 안전 (actions/checkout는 클론 통계에서 자동 제외)
+- PyPI 다운로드 ← ⚠️ 외부 필터링 후만 사용 + "CI 포함" 각주 필수
+- 상세: [#39](https://github.com/cubrid-lab/.github/issues/39)
+
 ## 측정 방법 및 재측정
 
 ```bash
