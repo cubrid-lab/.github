@@ -59,6 +59,17 @@ translations: drift emits a warning only; maintainers' AI agent opens resync PRs
 This hard gate is time-boxed for the 2026 contest finals and should be relaxed to
 advisory afterwards (see the reminder issue).
 
+## Roadmap Update Policy
+
+The ecosystem roadmap (`ROADMAP.md`) is a living document. It MUST be updated:
+- **On every release** — version bump + status change in the same PR as the release
+- **On every significant feature** — new items in the "Now" section of the feature PR
+- **On milestone completion** — move from "Next" to "Now" to completed
+
+If a PR changes public behavior, adds features, or bumps versions, the PR body must
+include `Roadmap: updated` or `Roadmap: not needed - <reason>`.
+This is enforced by code review, not CI (roadmap changes require human judgment).
+
 ## Operations Manual
 
 Releases, docs sites, CI gates, secrets, and the gotchas behind them:
