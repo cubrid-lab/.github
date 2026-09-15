@@ -1,0 +1,126 @@
+# Reusable live-CUBRID smoke workflow for cubrid-lab repositories.
+#
+# Runs a caller-supplied test command against a single, real CUBRID instance
+# so that CUBRID-only bugs (which offline / mock / SQLite tests cannot catch)
+# fail the PR that introduces them instead of surfacing weeks later.
+#
+# Design goals:
+#   1. FAST — one Python x one CUBRID version, so it adds only a few minutes.
+#   2. FAIL-CLOSED — if the suite runs zero tests or every test skips (e.g. the
+#      DB never came up), the job fails instead of passing green. This mirrors
+#      the pycubrid TLS job's unexpected-skip guard.
+#   3. THIN — this workflow owns CUBRID provisioning, readiness, the
+#      CUBRID_TEST_URL, and the skip guard; the caller owns the test command.
+#
+# Usage in a repository's .github/workflows/ci.yml:
+#
+#   live-smoke:
+#     needs: changes                 # optional path filter
+#     if: needs.changes.outputs.code == 'true'
+#     uses: cubrid-lab/.github/.github/workflows/live-smoke.yml@main
+#     with:
+#       test-command: "python -m pytest tests/test_integration.py -v --tb=short"
+
+name: Live CUBRID Smoke
+
+on:
+  workflow_call:
+    inputs:
+      test-command:
+        description: "Shell command that runs the smoke tests. CUBRID_TEST_URL is exported for it."
+        required: true
+        type: string
+      cubrid-version:
+        description: "CUBRID server image tag to run the smoke against."
+        required: false
+        type: string
+        default: "11.4"
+      python-version:
+        description: "Python version for the runner."
+        required: false
+        type: string
+        default: "3.12"
+      cubrid-test-url:
+        description: "Connection URL exported as CUBRID_TEST_URL for the test command."
+        required: false
+        type: string
+        default: "cubrid+pycubrid://dba@localhost:33000/testdb"
+      setup-command:
+        description: "Optional shell command run before the tests (install deps, build driver, etc.)."
+        required: false
+        type: string
+        default: "python -m pip install --upgrade pip && pip install -e '.[dev]'"
+      readiness-timeout:
+        description: "Seconds to wait for the CUBRID broker to accept connections."
+        required: false
+        type: number
+        default: 180
+      fail-on-empty:
+        description: "Fail the job if the suite ran zero tests or every test skipped."
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  live-smoke:
+    name: Live CUBRID smoke (${{ inputs.cubrid-version }})
+    runs-on: ubuntu-latest
+    services:
+      cubrid:
+        image: cubrid/cubrid:${{ inputs.cubrid-version }}
+        env:
+          CUBRID_DB: testdb
+        ports:
+          - 33000:33000
+        options: >-
+          --health-cmd "csql -u dba testdb -c 'SELECT 1'"
+          --health-interval 15s
+          --health-timeout 10s
+          --health-retries 10
+          --health-start-period 30s
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install project
+        run: ${{ inputs.setup-command }}
+
+      - name: Wait for CUBRID to accept connections
+        env:
+          READINESS_TIMEOUT: ${{ inputs.readiness-timeout }}
+        run: |
+          pip install pycubrid >/dev/null 2>&1 || true
+          deadline=$(( $(date +%s) + READINESS_TIMEOUT ))
+          until python -c "import pycubrid; pycubrid.connect(host='localhost', port=33000, database='testdb', user='dba', password='').close()" >/dev/null 2>&1; do
+            if [ "$(date +%s)" -ge "$deadline" ]; then
+              echo "::error::CUBRID did not accept connections within ${READINESS_TIMEOUT}s"
+              exit 1
+            fi
+            echo "Waiting for CUBRID..."
+            sleep 5
+          done
+          echo "CUBRID is ready."
+
+      - name: Run smoke tests
+        env:
+          CUBRID_TEST_URL: ${{ inputs.cubrid-test-url }}
+        run: |
+          set -o pipefail
+          ${{ inputs.test-command }} 2>&1 | tee smoke-run.log
+
+      - name: Guard against an all-skipped / empty smoke run
+        if: ${{ inputs.fail-on-empty }}
+        run: |
+          if grep -qE "no tests ran" smoke-run.log; then
+            echo "::error::Smoke suite ran zero tests — the live gate proved nothing (DB down? wrong path?)."
+            exit 1
+          fi
+          if grep -qE "^=+ .*[0-9]+ skipped" smoke-run.log \
+             && ! grep -qE "[0-9]+ (passed|failed|error)" smoke-run.log; then
+            echo "::error::Every smoke test skipped — the live gate proved nothing (CUBRID_TEST_URL not honoured?)."
+            exit 1
+          fi
+          echo "Smoke run executed real tests."
