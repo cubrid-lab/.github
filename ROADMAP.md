@@ -15,7 +15,7 @@
 ```mermaid
 graph TD
     subgraph Drivers["🔌 Drivers"]
-        pycubrid["pycubrid (Python)\nv1.7.0"]
+        pycubrid["pycubrid (Python)\nv1.7.1"]
         cubrid_client["cubrid-client (TypeScript)\nv1.1.0"]
         cubrid_go["cubrid-go (Go)\nv0.2.1"]
         cubrid_rs["cubrid-rs (Rust)\nv0.1.0"]
@@ -26,7 +26,7 @@ graph TD
     end
 
     subgraph ORMs["🏗️ ORMs & Dialects"]
-        sqlalchemy["sqlalchemy-cubrid\nv1.7.0"]
+        sqlalchemy["sqlalchemy-cubrid\nv1.7.1"]
         drizzle["drizzle-cubrid\nv0.2.1"]
         gorm["gorm-cubrid\nv0.1.0"]
         sea_orm["sea-orm-cubrid\nv0.1.0"]
@@ -62,7 +62,7 @@ graph TD
 
 - **cubrid-cookbook-python ✅ COMPLETE** — 75 examples (7 templates including AI agent), 45 CI golden-verified on **CUBRID 11.2 + 11.4 matrix**. [Support Matrix](https://github.com/cubrid-lab/cubrid-cookbook-python/blob/main/SUPPORT_MATRIX.md)
 - **cubrid-mcp-server v0.4.0 ✅ RELEASED** — 12 tools, 5 domain-knowledge resources (agent skills), 9 prompts (5 expert workflows), read-only whitelist, opt-in write mode, multi-connection, audit logging, SBOM on releases. fastmcp pin opened to `<5` (canary 3x green). Docs site live.
-- **Python ecosystem v1.7.0 stable** — pycubrid + sqlalchemy-cubrid both at v1.7.0 on PyPI. Native ENUM support (#343), `IS [NOT] DISTINCT FROM` emulation via `<=>` (#344). SQLAlchemy official test suite integrated. 1,916 total tests, 20-combination CI matrix, cross-platform (Ubuntu + macOS).
+- **Python ecosystem v1.7.1 stable** — pycubrid + sqlalchemy-cubrid both at v1.7.1 on PyPI. Native ENUM support (#343), `IS [NOT] DISTINCT FROM` emulation via `<=>` (#344). SQLAlchemy official test suite integrated. 1,916 total tests, 20-combination CI matrix, cross-platform (Ubuntu + macOS).
 - **Documentation & internationalization** — 4 docs sites (six-tab unified IA), 33 Korean documentation pages, 5-language READMEs on pycubrid/sqlalchemy-cubrid. Translation sync CI with Korean hard gate.
 - **Governance** — Label taxonomy with weekly drift audit, translation-sync CI, operations manual, demo GIFs on all READMEs, SBOM + THIRD_PARTY_LICENSES on every repo.
 ### 🟡 Next (1–3 Months)
@@ -125,9 +125,9 @@ graph LR
 
 | Repo | Next Milestone | Focus | Link |
 |------|---------------|-------|------|
-| **pycubrid** | v1.7.0 ✅ | Pure Python, asyncio+TLS, 1,147 tests, 95% coverage, cross-platform CI (Ubuntu+macOS), 35 PyPI releases, demo GIF | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
+| **pycubrid** | v1.7.1 ✅ | Pure Python, asyncio+TLS, 1,147 tests, 95% coverage, cross-platform CI (Ubuntu+macOS), 17 PyPI releases, demo GIF | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
 | **pycubrid** | [v2.0.0](https://github.com/cubrid-lab/pycubrid/milestone/1) | Next major — connection pooling, breaking changes deferred from 1.x | [Milestones](https://github.com/cubrid-lab/pycubrid/milestones) |
-| **sqlalchemy-cubrid** | v1.7.0 ✅ | SQLAlchemy 2.0–2.2, native ENUM (#343), IS DISTINCT FROM (#344), 769 tests, official SA test suite, 19 PyPI releases | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
+| **sqlalchemy-cubrid** | v1.7.1 ✅ | SQLAlchemy 2.0–2.2, native ENUM (#343), IS DISTINCT FROM (#344), 770 tests, official SA test suite, 20 PyPI releases | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
 | **sqlalchemy-cubrid** | [v2.0.0](https://github.com/cubrid-lab/sqlalchemy-cubrid/milestone/2) | SA 2.2 full GA support, JSON type mapping | [Milestones](https://github.com/cubrid-lab/sqlalchemy-cubrid/milestones) |
 | **cubrid-client** | [v1.2.0](https://github.com/cubrid-lab/cubrid-client/milestone/1) | Reliability & performance | [Milestones](https://github.com/cubrid-lab/cubrid-client/milestones) |
 | **drizzle-cubrid** | [v1.0.0](https://github.com/cubrid-lab/drizzle-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/drizzle-cubrid/milestones) |
