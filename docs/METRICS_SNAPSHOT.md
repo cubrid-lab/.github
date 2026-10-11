@@ -28,7 +28,7 @@ difference is visible.
 Suggested slide labels:
 
 - "External downloads **11,935** in 30 days (CI excluded)"
-- Conservative variant: "**7,286** installs by pip/uv/poetry in 30 days (CI and mirrors excluded)"
+- Conservative variant: "**7,286** downloads via pip/uv/poetry in 30 days (CI and mirrors excluded)"
 
 ## How CI traffic is excluded
 
@@ -76,7 +76,8 @@ The 14-day picture is more CI-heavy (PR activity was high): 26,522 downloads in 
    Unique visitors (views) are the safer GitHub traffic signal.
 5. Package names must be PEP 503 normalized (`sqlalchemy-cubrid`, not `sqlalchemy_cubrid`);
    a zero from this dataset is often a spelling mistake, not an absence.
-6. The ClickHouse mirror lags PyPI by about a day; the report prints the latest date present.
+6. The ClickHouse mirror lags PyPI by about a day; the report prints the latest download event
+   date for the selected packages (a quiet package can show an earlier date than the mirror).
    The endpoint is queried with `read_overflow_mode=throw` so an oversized scan fails instead
    of silently returning a partial count.
 

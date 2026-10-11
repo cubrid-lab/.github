@@ -125,6 +125,18 @@ class GitHubTests(unittest.TestCase):
         self.assertIn("needs push access", report)
         self.assertIn("(30 days, UTC)", report)
 
+    def test_other_errors_not_reported_as_access_problem(self) -> None:
+        stats = {"clones": "HTTP 404", "views": "HTTP 503"}
+        report = ma.render(
+            dt.date(2026, 9, 1), dt.date(2026, 9, 30), None, {}, None, {}, {"x": stats}, True
+        )
+        self.assertIn("unavailable (HTTP 404)", report)
+        self.assertNotIn("needs push access", report)
+
+    def test_release_total_is_na_when_any_count_missing(self) -> None:
+        self.assertIsNone(ma._sum_or_none([3, None]))
+        self.assertEqual(ma._sum_or_none([3, 4]), 7)
+
     def test_http_error_returns_status(self) -> None:
         err = urllib.error.HTTPError("u", 403, "Forbidden", None, None)
         with mock.patch.object(ma.urllib.request, "urlopen", side_effect=err):

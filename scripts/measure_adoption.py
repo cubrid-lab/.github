@@ -30,6 +30,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections.abc import Iterable
 
 CLICKHOUSE_URL = "https://sql-clickhouse.clickhouse.com/"
 GITHUB_API = "https://api.github.com"
@@ -196,6 +197,12 @@ def _fmt(value: object) -> str:
     return str(value)
 
 
+def _sum_or_none(values: Iterable[int | None]) -> int | None:
+    """Sum counts, or None if any is missing, so a partial total is never shown."""
+    vals = list(values)
+    return None if any(v is None for v in vals) else sum(vals)
+
+
 def _pct(part: int, whole: int) -> str:
     return f"{100 * part / whole:.1f}%" if whole else "n/a"
 
@@ -216,7 +223,7 @@ def render(
         "",
         f"- Generated: {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC",
         f"- PyPI window: {start} to {end} ({days} days, UTC)",
-        f"- Latest PyPI log date available: {latest or 'unknown'}",
+        f"- Latest download event for these packages: {latest or 'none in window'}",
         "- PyPI source: ClickHouse public mirror, table `pypi.pypi`, column `ci`",
         "",
         "## PyPI downloads",
@@ -247,7 +254,7 @@ def render(
             f"| **{tot['ci_unknown']:,}** | **{_pct(tot['ci_true'], tot['total'])}** "
             f"| **{tot['ci_false_installer']:,}** "
             f"| **{tot['ci_false'] - tot['ci_false_installer']:,}** "
-            f"| **{_fmt(sum(v for v in releases.values() if v))}** |"
+            f"| **{_fmt(_sum_or_none(releases.values()))}** |"
         )
         lines += [
             "",
@@ -280,7 +287,7 @@ def render(
             if isinstance(v, tuple):
                 cells.append(f"{_fmt(v[0])} / {_fmt(v[1])}")
             else:
-                traffic_denied = True
+                traffic_denied = traffic_denied or v in ("HTTP 401", "HTTP 403")
                 cells.append(f"unavailable ({v})")
         lines.append(
             f"| {repo} | {_fmt(s.get('stars'))} | {_fmt(s.get('forks'))} "
