@@ -33,8 +33,8 @@ CUBRID Lab은 CUBRID 데이터베이스를 위한 현대적이고 생산성 높�
 
 | Repository | Role | Version | Description | Status |
 |---|---|---|---|---|
-| **[pycubrid](https://github.com/cubrid-lab/pycubrid)** | Driver | v1.7.1 ![stable](https://img.shields.io/badge/-stable-brightgreen) | Pure Python DB-API 2.0 (PEP 249) driver — sync + native asyncio, TLS/SSL with STARTTLS | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/pycubrid/ci.yml?label=tests)](https://github.com/cubrid-lab/pycubrid/actions) [![PyPI](https://img.shields.io/pypi/v/pycubrid)](https://pypi.org/project/pycubrid) |
-| **[sqlalchemy-cubrid](https://github.com/cubrid-lab/sqlalchemy-cubrid)** | ORM | v1.7.1 ![stable](https://img.shields.io/badge/-stable-brightgreen) | SQLAlchemy 2.0–2.2 dialect + Alembic | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/sqlalchemy-cubrid/ci.yml?label=tests)](https://github.com/cubrid-lab/sqlalchemy-cubrid/actions) [![PyPI](https://img.shields.io/pypi/v/sqlalchemy-cubrid)](https://pypi.org/project/sqlalchemy-cubrid) |
+| **[pycubrid](https://github.com/cubrid-lab/pycubrid)** | Driver | v1.10.0 ![stable](https://img.shields.io/badge/-stable-brightgreen) | Pure Python DB-API 2.0 (PEP 249) driver — sync + native asyncio, TLS/SSL with STARTTLS. Python 3.11+, CUBRID 10.2–11.4 | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/pycubrid/ci.yml?label=tests)](https://github.com/cubrid-lab/pycubrid/actions) [![PyPI](https://img.shields.io/pypi/v/pycubrid)](https://pypi.org/project/pycubrid) |
+| **[sqlalchemy-cubrid](https://github.com/cubrid-lab/sqlalchemy-cubrid)** | ORM | v1.10.0 ![stable](https://img.shields.io/badge/-stable-brightgreen) | SQLAlchemy 2.0–2.1 dialect + Alembic, sync and async. Python 3.11+, CUBRID 10.2–11.4 | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/sqlalchemy-cubrid/ci.yml?label=tests)](https://github.com/cubrid-lab/sqlalchemy-cubrid/actions) [![PyPI](https://img.shields.io/pypi/v/sqlalchemy-cubrid)](https://pypi.org/project/sqlalchemy-cubrid) |
 | **[cubrid-mcp-server](https://github.com/cubrid-lab/cubrid-mcp-server)** | AI/LLM | v0.4.0 ![beta](https://img.shields.io/badge/-beta-blue) | Model Context Protocol server for CUBRID — 12 tools (read-only by default, opt-in writes), multi-connection, audit logging, docs at cubrid-lab.github.io/cubrid-mcp-server | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/cubrid-mcp-server/ci.yml?label=tests)](https://github.com/cubrid-lab/cubrid-mcp-server/actions) [![PyPI](https://img.shields.io/pypi/v/cubrid-mcp-server)](https://pypi.org/project/cubrid-mcp-server) |
 
 ### TypeScript / Node.js
@@ -65,6 +65,12 @@ CUBRID Lab은 CUBRID 데이터베이스를 위한 현대적이고 생산성 높�
 | **[cubrid-cookbook-python](https://github.com/cubrid-lab/cubrid-cookbook-python)** | Production-ready Python examples — quickstarts, migration guides, templates | ![active](https://img.shields.io/badge/-active%20development-yellow) |
 | **[cubrid-benchmark](https://github.com/cubrid-lab/cubrid-benchmark)** | Scientific benchmark suite — reproducible experiments, automated comparison | ![active](https://img.shields.io/badge/-active%20development-yellow) |
 
+### Infrastructure
+
+| Repository | Description | Status |
+|---|---|---|
+| **[cubrid-kubernetes-operator](https://github.com/cubrid-lab/cubrid-kubernetes-operator)** | Kubernetes operator for highly available CUBRID clusters, built around CUBRID native HA. Early-stage, not production-ready, and not a replacement for the official CUBRID Operator | ![experimental](https://img.shields.io/badge/-experimental-red) |
+
 ---
 
 ## Roadmap
@@ -92,7 +98,7 @@ Each repository includes setup instructions, API documentation, and examples.
 
 ## Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](../.github/CONTRIBUTING.md) for guidelines.
+We welcome contributions! Please see [CONTRIBUTING.md](https://github.com/cubrid-lab/.github/blob/main/CONTRIBUTING.md) for guidelines.
 
 **Community:**
 - 💬 Questions? Post in [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions)
@@ -110,7 +116,12 @@ All projects are licensed under the **MIT License**. See individual repositories
 
 ## Security
 
-If you discover a security vulnerability, please report it via [GitHub Security Advisories](https://github.com/cubrid-lab/sqlalchemy-cubrid/security/advisories) or email the maintainers. Do not open a public issue. See [SECURITY.md](../.github/SECURITY.md) for details.
+If you discover a security vulnerability, do not open a public issue. Report it privately:
+
+- **[pycubrid](https://github.com/cubrid-lab/pycubrid/security/advisories/new)** and **[sqlalchemy-cubrid](https://github.com/cubrid-lab/sqlalchemy-cubrid/security/advisories/new)**: use GitHub's private vulnerability reporting (the repository's **Security** tab → **Report a vulnerability**).
+- **Other repositories**: email the maintainers, using the contact in that repository's `SECURITY.md`.
+
+See the organization [SECURITY.md](https://github.com/cubrid-lab/.github/blob/main/SECURITY.md) for the disclosure timeline.
 
 ---
 
