@@ -1,92 +1,136 @@
-# 사용률 지표 스냅샷 — 발표 자료용
+# Adoption metrics snapshot — for presentations
 
-> 기준일: 2026-09-12 · 측정 방법: GitHub API + PyPI API (재측정 스크립트 포함)
+> Measured: 2026-10-11 (UTC) with [`scripts/measure_adoption.py`](../scripts/measure_adoption.py).
+> PyPI window: **2026-09-11 to 2026-10-10 (30 days)**. GitHub traffic: last 14 days as reported
+> by the Traffic API on 2026-10-11.
 
-## 핵심 숫자 (슬라이드 5·활용성 배점 대응)
+## Headline numbers
 
-| 지표 | pycubrid | sqlalchemy-cubrid | cubrid-mcp-server | cubrid-cookbook | **합계** |
+Use the CI-excluded figures on slides. The CI-inclusive figures are shown only so the
+difference is visible.
+
+| Metric | pycubrid | sqlalchemy-cubrid | cubrid-mcp-server | cubrid-cookbook-python | **Total** |
 |---|---:|---:|---:|---:|---:|
-| GitHub 스타 | 21 | 28 | 21 | 17 | **87** |
-| 유니크 클론 (14일) | 234 | 183 | 157 | 73 | **647** |
-| 유니크 방문 (14일) | 21 | 17 | 14 | 10 | **62** |
-| 병합된 PR | 154 | 148 | 78 | 52 | **432** |
-| 활성 CI 워크플로 | 18 | 20 | — | — | **38+** |
-| PyPI 릴리스 | 16 | 19 | (게시 대기) | — | **35** |
-| 문서 사이트 | ✅ 200 | ✅ 200 | ✅ 200 | ✅ 200 | **4/4** |
-| 외부 기여자 | 0 | 0 | 1 | 1 | **2** |
+| PyPI downloads, 30d, **CI excluded** (`ci=false`) | 6,080 | 5,117 | 738 | — | **11,935** |
+| of which via pip / uv / poetry / pdm / pipenv | 4,071 | 3,180 | 35 | — | **7,286** |
+| PyPI downloads, 30d, CI included (all rows) | 20,430 | 13,926 | 872 | — | 35,228 |
+| Share of downloads flagged CI (`ci=true`) | 70.2% | 63.3% | 15.4% | — | 66.1% |
+| PyPI releases | 20 | 23 | 1 | — | **44** |
+| GitHub stars | 31 | 38 | 32 | 28 | **129** |
+| GitHub forks | 18 | 14 | 8 | 9 | **49** |
+| GitHub releases (published) | 24 | 21 | 5 | 0 | **50** |
+| Merged PRs | 406 | 388 | 137 | 138 | **1,069** |
+| Unique visitors, 14d | 53 | 44 | 13 | 20 | **130** |
+| Unique cloners, 14d (**CI included**, see below) | 1,562 | 1,390 | 381 | 621 | 3,954 |
+| Active CI workflows | 22 | 22 | 12 | 12 | **68** |
+| Docs site (HTTP 200) | yes | yes | yes | yes | **4/4** |
 
-## 슬라이드에 넣을 핵심 메시지
+Suggested slide labels:
 
-### 지속성 지표 (가장 강한 증거)
-```
-유니크 클론 647회/14일 = 실제로 코드를 내려받는 사람이 주당 ~324명
-  → 단순 "스타 누르고 끝"이 아니라 clone을 하는 개발자
-  → CI 재현·실험·학습 목적으로 추정
-```
+- "External downloads **11,935** in 30 days (CI excluded)"
+- Conservative variant: "**7,286** downloads via pip/uv/poetry in 30 days (CI and mirrors excluded)"
 
-### 완성도 지표
-```
-PR 432개 병합 = 하루 평균 7개 (2026-09 기준 2개월)
-  → 두 유지보수자 + AI 에이전트가 산출한 검증된 변경
-  → 전 PR CI 게이트 통과 (20 Python×CUBRID 조합 통합 테스트)
-```
+## How CI traffic is excluded
 
-### 신뢰성 지표
-```
-PyPI v1.7.0 · 16+19회 릴리스 (첫 게시 2022-07 → 현재)
-  → 4년간 지속 유지보수 (v0.x의 안정적 1.x 성숙)
-  → 월 2~3회 정기 릴리스 주기
+PyPI's download log (linehaul) records whether the installer reported running in CI. The
+public ClickHouse mirror keeps that column on its event-level table `pypi.pypi`:
+
+```text
+ci  Enum8('false' = 0, 'true' = 1, 'unknown' = 2)
 ```
 
-### AI/LLM 생태계
-```
-cubrid-mcp-server v0.4.0 (GitHub Release 게시 완료)
-  → 12 MCP 도구 · 읽기 전용 화이트리스트 · 옵트인 쓰기
-  → AI 에이전트 템플릿 5종 (cookbook templates/ai-agent/)
-```
+(verified with `DESCRIBE TABLE pypi.pypi` on 2026-10-11). The per-day summary tables drop it,
+so the script queries the event-level table directly. No account or key is needed. This
+replaces the originally planned approach of rebuilding the CI split from GitHub Actions IP
+ranges in BigQuery.
 
-## ⚠️ PyPI 다운로드 오염 주의 (#39)
+Columns in the report:
 
-자체 CI(cookbook smoke-test · pycubrid/sqlalchemy 통합테스트)가 `pip install`을 실행하므로
-PyPI 다운로드 수에는 일 20~50회의 자체 트래픽이 포함됨.
+- **`ci=true`**: the installer said it ran in CI (pip and uv detect CI environment variables).
+  Our own CI (cookbook smoke tests, pycubrid / sqlalchemy-cubrid integration matrices) lands here.
+- **`ci=false`**: everything else that did not report CI. This is the "CI excluded" figure.
+- **`ci=unknown`**: neither. It was 0 for all three packages in this window; the script
+  reports it separately instead of folding it into either side.
+- **via installers**: the `ci=false` rows whose user agent is pip, uv, poetry, pdm or pipenv.
+  The remainder ("mirror / other") is mirrors such as bandersnatch and Nexus, browsers, plain
+  HTTP clients and an empty user agent.
 
-**발표 시:**
-- GitHub 클론 유니크 647명 ← ✅ 안전 (actions/checkout는 클론 통계에서 자동 제외)
-- PyPI 다운로드 ← ⚠️ 외부 필터링 후만 사용 + "CI 포함" 각주 필수
-- 상세: [#39](https://github.com/cubrid-lab/.github/issues/39)
+The 14-day picture is more CI-heavy (PR activity was high): 26,522 downloads in total, of which
+19,597 (73.9%) were `ci=true`; 6,925 CI excluded, 3,913 via installers.
 
-## 측정 방법 및 재측정
+## Caveats (state these if asked)
+
+1. **The `ci` flag is self-reported** by the installer. It is not ground truth; a runner that
+   does not set the usual environment variables is counted as `ci=false`.
+2. **CI excluded is not "unique users".** `ci=false` still includes maintainers' local installs,
+   repeated installs by the same person, and mirror syncs. The installer-only figure removes
+   mirrors but not repeats.
+3. **cubrid-mcp-server** has few installer downloads (35 of 738 `ci=false`); most of its
+   traffic is mirrors. Its first PyPI release is recent, so its numbers are not comparable yet.
+4. **GitHub clones are not CI-free.** The earlier assumption that `actions/checkout` uses the
+   tarball API and is therefore excluded from clone counts is wrong: `actions/checkout` only
+   falls back to the REST API when Git 2.18+ is missing, and GitHub-hosted runners ship Git.
+   With roughly 900 to 2,500+ workflow runs per repository in 14 days, unique-cloner counts
+   are dominated by CI and cannot be split with the Traffic API. Do not present clones as
+   developer interest.
+   Unique visitors (views) are the safer GitHub traffic signal.
+5. Package names must be PEP 503 normalized (`sqlalchemy-cubrid`, not `sqlalchemy_cubrid`);
+   a zero from this dataset is often a spelling mistake, not an absence.
+6. The ClickHouse mirror lags PyPI by about a day; the report prints the latest download event
+   date for the selected packages (a quiet package can show an earlier date than the mirror).
+   The endpoint is queried with `read_overflow_mode=throw` so an oversized scan fails instead
+   of silently returning a partial count.
+
+## Re-measuring
 
 ```bash
-# GitHub 스타·클론·방문 (14일)
-gh repo view cubrid-lab/pycubrid --json stargazerCount --jq .stargazerCount
-gh api repos/cubrid-lab/pycubrid/traffic/clones?per=week --jq '{count,uniques}'
-gh api repos/cubrid-lab/pycubrid/traffic/views?per=week --jq '{count,uniques}'
+# Full report (PyPI split + GitHub stats), 30-day window ending yesterday (UTC)
+python scripts/measure_adoption.py --window-days 30 --output adoption.md
 
-# PyPI 다운로드 (BigQuery 무료 쿼리)
-# https://console.cloud.google.com → bigquery-public-data.pypi.file_downloads
-SELECT COUNT(*) FROM `bigquery-public-data.pypi.file_downloads`
-WHERE project = 'pycubrid' AND timestamp >= '2026-08-01'
+# Reproduce this snapshot exactly
+python scripts/measure_adoption.py --window-days 30 --end-date 2026-10-10
 
-# 병합 PR 수
-gh pr list -R cubrid-lab/pycubrid --state merged --limit 1000 --json number --jq 'length'
+# Unit tests (mocked HTTP, no network)
+python -m unittest discover -s scripts -p 'test_*.py'
 ```
 
-## 부족한 지표 (발표 시 솔직하게 인정)
+GitHub numbers use `GH_TOKEN` / `GITHUB_TOKEN`, or the token of a logged-in `gh` CLI. Clone and
+view counts need push access to each repository; without it the report says "unavailable
+(HTTP 403)" (or 401 without a token) and continues.
 
-| 지표 | 현재 | 개선 방향 |
+The raw PyPI query, runnable by anyone at
+`https://sql-clickhouse.clickhouse.com/?user=demo&read_overflow_mode=throw`:
+
+```sql
+SELECT project, ci, count() AS downloads
+FROM pypi.pypi
+WHERE project IN ('pycubrid', 'sqlalchemy-cubrid', 'cubrid-mcp-server')
+  AND date BETWEEN toDate('2026-09-11') AND toDate('2026-10-10')
+GROUP BY project, ci
+ORDER BY project, ci
+```
+
+Active workflows and docs sites are not in the script; they were checked with:
+
+```bash
+gh api repos/cubrid-lab/pycubrid/actions/workflows --jq '[.workflows[]|select(.state=="active")]|length'
+curl -s -o /dev/null -w '%{http_code}' -L https://cubrid-lab.github.io/pycubrid/
+```
+
+## Known gaps
+
+| Metric | Status | Direction |
 |---|---|---|
-| PyPI 일별 다운로드 | 측정 대기 | BigQuery 무료 쿼리로 발표 전 확보 |
-| 외부 기여자 | 2명 | GFI 5개 시드 → 대회 후 유입 유도 |
-| 스타 대비 포크 비율 | 낮음 (포크 1~2) | 실사용자가 fork 없이 pip install로 사용 |
-| 다운로드 → 설치 전환 | 측정 불가 | `pip install` 자체는 추적 안 됨 |
+| Unique users | Not measurable from PyPI | Downloads are events, not people |
+| GitHub clones without CI | Not measurable | Use unique visitors instead |
+| External contributors | Not re-measured (2 on 2026-09-12) | Seed good first issues |
+| Fork ratio | Low | Users install from PyPI rather than fork |
 
-## 발표 전 재측정 스케줄
+## Before the presentation
 
-- [ ] 발표 1주 전: GitHub 트래픽 + 스타 재측정
-- [ ] 발표 3일 전: PyPI BigQuery 다운로드 수 확보
-- [ ] 발표 당일 아침: 최종 숫자 확정 (이 문서 갱신)
-- [ ] CUBRID 공식 등재 답변 도착 시: "후원사 인정" 항목 추가
+- [ ] One week before: re-run the script and update this file.
+- [ ] Morning of the presentation: final re-run; copy the "CI excluded" line onto the slide.
+- [ ] If CUBRID official listing is confirmed: add a "sponsor recognition" row.
 
 ---
-*이 파일은 cubrid-lab/.github에 저장하여 org 차원에서 관리*
+*Kept in cubrid-lab/.github and maintained at the organization level.*
