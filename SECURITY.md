@@ -6,12 +6,17 @@ If you discover a security vulnerability in any CUBRID Labs project, **please do
 
 ### Option 1: GitHub Security Advisories (Preferred)
 
-Use the **Private Vulnerability Reporting** feature on each repository:
+Use the **Private Vulnerability Reporting** feature on repositories where it is enabled
+(currently [pycubrid](https://github.com/cubrid-lab/pycubrid/security/advisories/new) and
+[sqlalchemy-cubrid](https://github.com/cubrid-lab/sqlalchemy-cubrid/security/advisories/new)):
 
 1. Go to the repository's **Security** tab
 2. Click **Report a vulnerability**
 3. Fill out the form with details about the vulnerability
-4. Submit — this creates a private advisory visible only to maintainers
+4. Submit — this creates a private advisory. It is not public: only you, the maintainers
+   and anyone they invite to the advisory can see it.
+
+For a repository without the **Report a vulnerability** button, use Option 2.
 
 ### Option 2: Email
 
