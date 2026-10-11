@@ -1,0 +1,91 @@
+name: Bug Report
+description: Report a bug
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **House rules**
+        - File this issue in English.
+        - For DDL or parse errors, include the exact failing SQL and the result of running
+          it directly on the server with `csql`.
+        - Verify any claimed reserved word against the CUBRID keyword list before reporting it.
+        - Include a runnable reproduction.
+
+  - type: markdown
+    attributes:
+      value: |
+        Keep the `fix:` title prefix. You do not need to apply labels;
+        maintainers assign priority and size after triage.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide a clear and concise description of the bug
+      placeholder: What is the bug about?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Provide step-by-step instructions to reproduce the bug
+      placeholder: |
+        1. First step
+        2. Second step
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: Describe what you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: Describe what actually happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide details about your environment
+      placeholder: |
+        - Project and version:
+        - CUBRID version: 11.2
+        - Language and runtime version:
+        - Operating System:
+    validations:
+      required: true
+
+  - type: textarea
+    id: sql-verification
+    attributes:
+      label: DDL / SQL error verification
+      description: >-
+        Optional, but required when the report involves a DDL or parse error. Paste the exact
+        failing SQL and the output of running it directly with `csql` on the server.
+        Reserved-word claims must be checked against the CUBRID keyword list.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the bug here
+      placeholder: Code snippets, error messages, logs, etc.
+    validations:
+      required: false
