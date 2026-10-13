@@ -1,6 +1,6 @@
 # CUBRID Labs — Ecosystem Roadmap
 
-> **Last updated**: 2026-10-11
+> **Last updated**: 2026-10-13
 >
 > This is the unified roadmap for the cubrid-lab ecosystem.
 > Milestones are authoritative for "next release" scope.
@@ -15,21 +15,21 @@
 ```mermaid
 graph TD
     subgraph Drivers["🔌 Drivers"]
-        pycubrid["pycubrid (Python)\nv1.10.0"]
-        cubrid_client["cubrid-client (TypeScript)\nv1.1.0"]
-        cubrid_go["cubrid-go (Go)\nv0.2.1"]
-        cubrid_rs["cubrid-rs (Rust)\nv0.1.0"]
+        pycubrid["pycubrid (Python)"]
+        cubrid_client["cubrid-client (TypeScript)"]
+        cubrid_go["cubrid-go (Go)"]
+        cubrid_rs["cubrid-rs (Rust)"]
     end
 
     subgraph AI["🤖 AI / MCP"]
-        mcp["cubrid-mcp-server\nv0.4.0"]
+        mcp["cubrid-mcp-server"]
     end
 
     subgraph ORMs["🏗️ ORMs & Dialects"]
-        sqlalchemy["sqlalchemy-cubrid\nv1.10.0"]
-        drizzle["drizzle-cubrid\nv0.2.1"]
-        gorm["gorm-cubrid\nv0.1.0"]
-        sea_orm["sea-orm-cubrid\nv0.1.0"]
+        sqlalchemy["sqlalchemy-cubrid"]
+        drizzle["drizzle-cubrid"]
+        gorm["gorm-cubrid"]
+        sea_orm["sea-orm-cubrid"]
     end
 
     subgraph Meta["📚 Meta"]
@@ -58,23 +58,24 @@ graph TD
     cubrid_rs --> benchmark
 ```
 
+Current release versions are shown as live badges in the [organization profile](https://github.com/cubrid-lab) and in [Release Focus by Repo](#release-focus-by-repo).
+
 ---
 
 ## Now / Next / Later
 
 ### 🟢 Now (Current Focus)
 
-- **Python stabilization cycle** ([pycubrid#815](https://github.com/cubrid-lab/pycubrid/issues/815)) — no new product capabilities; finish documented contracts, focused fixes and candidate verification across pycubrid, sqlalchemy-cubrid, cubrid-mcp-server and cubrid-cookbook-python. Release PRs: pycubrid 1.11.0 (#790), sqlalchemy-cubrid 1.10.1 (#770), cubrid-mcp-server 0.5.0 (#261).
-- **Python ecosystem v1.10.0 stable** — pycubrid and sqlalchemy-cubrid v1.10.0 on PyPI (2026-10-09). Both now require **Python 3.11+** (3.10 retired after the 1.9.x line) and support CUBRID 10.2–11.4. sqlalchemy-cubrid supports SQLAlchemy 2.0–2.1. Releases go through release-please PRs and a guarded publisher that runs the full compatibility matrix on the release commit.
+- **Python stabilization cycle ✅ COMPLETE** ([pycubrid#815](https://github.com/cubrid-lab/pycubrid/issues/815)) — documented contracts, focused fixes and candidate verification across pycubrid, sqlalchemy-cubrid, cubrid-mcp-server and cubrid-cookbook-python. Shipped pycubrid 1.11.0 (2026-10-11) and 1.12.0, sqlalchemy-cubrid 1.11.0 and cubrid-mcp-server 0.5.0 (all 2026-10-12).
+- **Python ecosystem stable 1.x** — pycubrid and sqlalchemy-cubrid on PyPI. Both require **Python 3.11+** (3.10 retired after the 1.9.x line; Python 3.15 supported since pycubrid 1.11.0 and sqlalchemy-cubrid 1.11.0) and support CUBRID 10.2–11.4. sqlalchemy-cubrid supports SQLAlchemy 2.0–2.1. Releases go through release-please PRs and a guarded publisher that runs the full compatibility matrix on the release commit.
 - **cubrid-cookbook-python ✅ COMPLETE** — 75 examples (7 templates including AI agent), 45 CI golden-verified on **CUBRID 11.2 + 11.4 matrix**. [Support Matrix](https://github.com/cubrid-lab/cubrid-cookbook-python/blob/main/SUPPORT_MATRIX.md)
-- **cubrid-mcp-server v0.4.0 ✅ RELEASED** — on PyPI since 2026-09-13. 12 tools, 5 domain-knowledge resources (agent skills), 9 prompts (5 expert workflows), read-only whitelist, opt-in write mode, multi-connection, audit logging, SBOM on releases. fastmcp pin opened to `<5` (canary 3x green). Docs site live.
+- **cubrid-mcp-server 0.5.0 ✅ RELEASED** — on PyPI (2026-10-12; Python 3.11+). 11 read-only tools plus the opt-in `execute_write`, schema resources, 5 domain-knowledge resources (agent skills), 9 prompts (5 expert workflows), read-only whitelist, multi-connection, audit logging, SBOM on releases. fastmcp pin opened to `<5` (canary 3x green). Docs site live.
 - **Documentation & internationalization** — 4 docs sites (six-tab unified IA), 33 Korean documentation pages, 5-language READMEs on pycubrid/sqlalchemy-cubrid. Translation sync CI with Korean hard gate.
 - **Governance** — Label taxonomy with weekly drift audit, translation-sync CI, operations manual, demo GIFs on all READMEs, SBOM + THIRD_PARTY_LICENSES on every repo.
 ### 🟡 Next (1–3 Months)
 
 - **cubrid-mcp-server directory listings** — MCP Registry, Glama, mcp.so (PyPI publish done, #154).
 - **SQLAlchemy 2.2** — sqlalchemy-cubrid is capped below 2.2 until 2.2 ships and passes the full matrix ([sqlalchemy-cubrid#778](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/778)).
-- **Python 3.15** — the sqlalchemy-cubrid preview lane passed on CPython 3.15.0 final (2026-10-11); promotion to a supported version follows the stabilization cycle ([sqlalchemy-cubrid#666](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/666)).
 - **CUBRID 12 support** — Track upstream release; test drivers against CUBRID 12 when available.
 - **Vector types (cubvec)** — Server `cubvec` branch analyzed (wire format, type codes, HNSW). Prototype behind experimental flag once server releases.
 - **Windows CI** — macOS + Linux active; Windows offline tests planned (pure Python, no technical blocker).
@@ -94,14 +95,14 @@ graph TD
 ```mermaid
 graph LR
     subgraph "Must stabilize first"
-        A[pycubrid v1.0.0]
+        A[pycubrid 1.x ✅]
         B[cubrid-go v1.0.0]
         C[cubrid-rs v0.2.0]
         D[cubrid-client v1.2.0]
     end
 
     subgraph "Depends on driver stability"
-        E[sqlalchemy-cubrid v0.8.0]
+        E[sqlalchemy-cubrid 1.x ✅]
         F[gorm-cubrid v1.0.0]
         G[drizzle-cubrid v1.0.0]
         H[sea-orm-cubrid v1.0.0]
@@ -132,9 +133,9 @@ graph LR
 
 | Repo | Next Milestone | Focus | Link |
 |------|---------------|-------|------|
-| **pycubrid** | v1.10.0 ✅ | Pure Python DB-API 2.0, asyncio + TLS, Python 3.11+, CUBRID 10.2–11.4, 95% coverage floor; 1.11.0 release PR open (#790) | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
+| **pycubrid** | [![PyPI](https://img.shields.io/pypi/v/pycubrid)](https://pypi.org/project/pycubrid) ✅ | Pure Python DB-API 2.0, asyncio + TLS, Python 3.11+, CUBRID 10.2–11.4, 95% coverage floor | [Releases](https://github.com/cubrid-lab/pycubrid/releases) |
 | **pycubrid** | [v2.0.0](https://github.com/cubrid-lab/pycubrid/milestone/5) | Next major — connection pooling, breaking changes deferred from 1.x | [Milestones](https://github.com/cubrid-lab/pycubrid/milestones) |
-| **sqlalchemy-cubrid** | v1.10.0 ✅ | SQLAlchemy 2.0–2.1 + Alembic, sync and async, Python 3.11+, CUBRID 10.2–11.4, official SA test suite; 1.10.1 release PR open (#770) | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
+| **sqlalchemy-cubrid** | [![PyPI](https://img.shields.io/pypi/v/sqlalchemy-cubrid)](https://pypi.org/project/sqlalchemy-cubrid) ✅ | SQLAlchemy 2.0–2.1 + Alembic, sync and async, Python 3.11+, CUBRID 10.2–11.4, official SA test suite | [Releases](https://github.com/cubrid-lab/sqlalchemy-cubrid/releases) |
 | **sqlalchemy-cubrid** | Next | SQLAlchemy 2.2 once it ships and passes the full matrix ([#778](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/778)) | [Milestones](https://github.com/cubrid-lab/sqlalchemy-cubrid/milestones) |
 | **cubrid-client** | [v1.2.0](https://github.com/cubrid-lab/cubrid-client/milestone/1) | Reliability & performance | [Milestones](https://github.com/cubrid-lab/cubrid-client/milestones) |
 | **drizzle-cubrid** | [v1.0.0](https://github.com/cubrid-lab/drizzle-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/drizzle-cubrid/milestones) |
@@ -144,7 +145,7 @@ graph LR
 | **cubrid-rs** | [v1.0.0](https://github.com/cubrid-lab/cubrid-rs/milestone/2) | Stable release | [Milestones](https://github.com/cubrid-lab/cubrid-rs/milestones) |
 | **sea-orm-cubrid** | [v1.0.0](https://github.com/cubrid-lab/sea-orm-cubrid/milestone/1) | Stable release | [Milestones](https://github.com/cubrid-lab/sea-orm-cubrid/milestones) |
 | **cubrid-cookbook-python** | ✅ Complete | 75 examples (7 templates incl. AI agent), 45 CI golden-verified 11.2+11.4, one-command dashboard, demo GIFs | [Repo](https://github.com/cubrid-lab/cubrid-cookbook-python) |
-| **cubrid-mcp-server** | v0.4.0 ✅ | 12 tools + 5 skill resources + 9 prompts, read-only whitelist, multi-connection, SBOM; fastmcp `<5`; on PyPI; 0.5.0 release PR open (#261) | [Releases](https://github.com/cubrid-lab/cubrid-mcp-server/releases) |
+| **cubrid-mcp-server** | [![PyPI](https://img.shields.io/pypi/v/cubrid-mcp-server)](https://pypi.org/project/cubrid-mcp-server) ✅ | 11 read-only tools + opt-in `execute_write`, 5 skill resources + schema resources, 9 prompts, read-only whitelist, multi-connection, SBOM; fastmcp `<5`; on PyPI | [Releases](https://github.com/cubrid-lab/cubrid-mcp-server/releases) |
 | **cubrid-benchmark** | [v1.0](https://github.com/cubrid-lab/cubrid-benchmark/milestone/1) | Comprehensive benchmarks | [Milestones](https://github.com/cubrid-lab/cubrid-benchmark/milestones) |
 
 ---

@@ -42,12 +42,14 @@ benchmark → profile → optimize driver/ORM → re-benchmark → CI-verified r
 
 ### Core Repos
 
+Current release versions: live badges in [`profile/README.md`](profile/README.md).
+
 | Repo | Role | Current State |
 |------|------|---------------|
 | `cubrid-benchmark` | Benchmark suite (Python/TS/Go × CUBRID/MySQL) | Tier 0+1+Extended, CI, GitHub Pages — **most mature** |
-| `pycubrid` | Python driver (PEP 249) | v1.7.1, published PyPI — **stable 1.x, async TLS + STARTTLS hardening, transport contract lock, 1.x compat-check CI gate; 2 perf cycles complete, 19% fetch improvement** |
-| `sqlalchemy-cubrid` | SQLAlchemy 2.0–2.2 dialect | v1.7.1, published PyPI — **stable 1.x, SQLAlchemy 2.1/2.2 forward-compat shims, async integration stability; query compilation optimized** |
-| `cubrid-mcp-server` | MCP server (LLM ↔ CUBRID) | v0.4.0, GitHub Release shipped (PyPI publish pending trusted-publisher registration #154) — **12 tools, read-only whitelist + opt-in write mode, multi-connection, audit log, docs site live** |
+| `pycubrid` | Python driver (PEP 249) | stable 1.x on PyPI — **async TLS + STARTTLS hardening, transport contract lock, 1.x compat-check CI gate; 2 perf cycles complete, 19% fetch improvement** |
+| `sqlalchemy-cubrid` | SQLAlchemy 2.0–2.1 dialect | stable 1.x on PyPI — **SQLAlchemy 2.0–2.1 compat shims, async integration stability; query compilation optimized** |
+| `cubrid-mcp-server` | MCP server (LLM ↔ CUBRID) | 0.x beta on PyPI — **11 read-only tools plus opt-in `execute_write`, read-only whitelist + opt-in write mode, multi-connection, audit log, docs site live** |
 | `cubrid-cookbook` | Runnable examples across all languages | Python: **68 examples, 45 CI golden-verified on CUBRID 11.2 + 11.4**, one-command dashboard template; other languages planned |
 
 ## Translation Policy (cubrid-lab org)
@@ -88,7 +90,7 @@ auto-applied. Domain labels are repo-optional `area: ...` only.
 
 ### Supporting Repos
 
-`cubrid-client` (TS, v1.1.0), `cubrid-go`, `cubrid-rs`, `drizzle-cubrid`, `gorm-cubrid`, `sea-orm-cubrid`
+`cubrid-client` (TS), `cubrid-go`, `cubrid-rs`, `drizzle-cubrid`, `gorm-cubrid`, `sea-orm-cubrid`
 
 ### Execution Phases
 
