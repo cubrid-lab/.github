@@ -42,6 +42,7 @@ Known gotchas (both fixed in the workflows, kept here as memory):
 | Changelog lint | mcp-server `ci.yml` | missing/undated `[Unreleased]`/version sections | none (fix the changelog) |
 | Integration matrices | pycubrid/sqlalchemy (Python × CUBRID 10.2–11.4), mcp-server (CUBRID 11.2+11.4), cookbook smoke (`make verify` goldens, 11.2+11.4) | live-DB test failure | none; infra flakes → re-run |
 | CI gate / matrix-result | summary jobs | any leg failed | none |
+| Profile drift | `.github` `profile-drift.yml` (weekly Monday, manual, and PRs touching the profile) | hard-coded `vX.Y.Z` in the `profile/README.md` Projects tables; a listed repo that is missing, archived or renamed; a public non-fork repo that is not listed. Scheduled/manual failures open or update one `[automated] Organization profile is out of date` issue, closed by the next passing run | list an intentionally hidden repo in `UNLISTED_OK` in `scripts/check_profile_drift.py` |
 
 Runner-port flakes (`address already in use` on 33000) are re-runs, not code problems.
 

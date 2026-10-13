@@ -1,0 +1,131 @@
+name: profile-drift
+
+# Weekly check that the organization profile (profile/README.md) states no
+# stale facts: hard-coded versions in the Projects tables, listed repositories
+# that are missing, archived or renamed, and public repositories that are not
+# listed. See scripts/check_profile_drift.py.
+#
+# A failing check fails the run. On a scheduled or manual run it also opens or
+# updates one tracking issue; a later passing run closes that issue.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # weekly Monday 07:00 UTC
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - profile/README.md
+      - scripts/check_profile_drift.py
+      - .github/workflows/profile-drift.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      drift: ${{ steps.drift.outputs.drift }}
+      report: ${{ steps.drift.outputs.report }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Check profile drift
+        id: drift
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          status=0
+          python scripts/check_profile_drift.py --report drift-report.md || status=$?
+          if [ ! -f drift-report.md ]; then
+            echo "::error::The drift check did not complete (exit $status)."
+            exit 1
+          fi
+          cat drift-report.md >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "drift=$([ "$status" -eq 0 ] && echo false || echo true)"
+            echo "report<<PROFILE_DRIFT_EOF"
+            cat drift-report.md
+            echo "PROFILE_DRIFT_EOF"
+          } >> "$GITHUB_OUTPUT"
+          if [ "$status" -ne 0 ]; then
+            echo "::error::profile/README.md is out of date; see the job summary."
+            exit 1
+          fi
+
+  tracking-issue:
+    needs: check
+    if: ${{ always() && github.event_name != 'pull_request' && needs.check.outputs.drift != '' }}
+    runs-on: ubuntu-latest
+    # One run at a time, so two runs cannot both create the tracking issue.
+    concurrency:
+      group: profile-drift-tracking-issue
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Open, update or close the tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRIFT: ${{ needs.check.outputs.drift }}
+          REPORT: ${{ needs.check.outputs.report }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          TITLE: "[automated] Organization profile is out of date"
+        run: |
+          number=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --search "\"$TITLE\" in:title" --json number,title \
+            --jq '.[] | select(.title == env.TITLE) | .number' | head -n 1)
+
+          if [ "$DRIFT" = "false" ]; then
+            if [ -n "$number" ]; then
+              gh issue close "$number" --repo "$GITHUB_REPOSITORY" \
+                --comment "The weekly profile check passes again: $RUN_URL"
+            fi
+            exit 0
+          fi
+
+          {
+            printf '%s\n\n' "$REPORT"
+            echo "Detected by the \`profile-drift\` workflow: $RUN_URL ($(date -u +%Y-%m-%d))."
+            echo
+            echo "Fix \`profile/README.md\` (or \`UNLISTED_OK\` in \`scripts/check_profile_drift.py\`" \
+              "for a repository that should not be listed). This issue closes when the check passes."
+          } > body.md
+
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --repo "$GITHUB_REPOSITORY" --body-file body.md
+            exit 0
+          fi
+
+          # Create any missing label from .github/labels.yml, the label source of truth.
+          labels=("priority: medium" "size: S" "documentation" "automated")
+          for label in "${labels[@]}"; do
+            encoded=$(jq -rn --arg l "$label" '$l | @uri')
+            if gh api "repos/$GITHUB_REPOSITORY/labels/$encoded" > /dev/null 2>&1; then
+              continue
+            fi
+            spec=$(LABEL="$label" python3 -c '
+          import os, re
+          text = open(".github/labels.yml", encoding="utf-8").read()
+          label = re.escape(os.environ["LABEL"])
+          m = re.search(r"\{name: \"?" + label + r"\"?, color: \"?(\w{6})\"?, description: ([^}]*)\}", text)
+          print(f"{m.group(1)}\t{m.group(2).strip()}")
+          ')
+            gh label create "$label" --repo "$GITHUB_REPOSITORY" \
+              --color "${spec%%$'\t'*}" --description "${spec#*$'\t'}"
+          done
+
+          args=()
+          for label in "${labels[@]}"; do args+=(--label "$label"); done
+          gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file body.md "${args[@]}"
