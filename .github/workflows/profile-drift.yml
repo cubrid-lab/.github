@@ -63,6 +63,10 @@ jobs:
     needs: check
     if: ${{ always() && github.event_name != 'pull_request' && needs.check.outputs.drift != '' }}
     runs-on: ubuntu-latest
+    # One run at a time, so two runs cannot both create the tracking issue.
+    concurrency:
+      group: profile-drift-tracking-issue
+      cancel-in-progress: false
     permissions:
       contents: read
       issues: write
