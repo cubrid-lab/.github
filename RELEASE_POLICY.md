@@ -20,7 +20,7 @@ For every release (patch, minor, major), complete the following:
 - [ ] `SUPPORT_MATRIX.md` (if present) matches badges
 - [ ] `ROADMAP.md` updated: completed items moved to "Completed", next milestone revised
 - [ ] All `docs/` files reviewed for stale references
-- [ ] Link checker (see [`docs/LINK_CHECK.md`](LINK_CHECK.md)) is green on the release branch
+- [ ] Link checker (see [`docs/LINK_CHECK.md`](docs/LINK_CHECK.md)) is green on the release branch
 
 ### About metadata (Settings → About)
 
