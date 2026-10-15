@@ -15,8 +15,10 @@
 #       exclude: "node_modules/,vendor/,typescript/"   # optional
 #       mermaid-scanner-version: "v1"                   # optional, pins scanner
 #
-# The workflow is advisory (continue-on-error) during the initial rollout.
-# After the backlog of existing issues is fixed, flip fail-on-issue to true.
+# Markdown style and Mermaid findings are advisory (continue-on-error) during the
+# initial rollout; after the backlog is fixed, flip fail-on-issue to true. Broken
+# links follow fail-on-issue too, but a link-checker tool or configuration error
+# always fails the job.
 
 name: Documentation Lint
 
@@ -80,7 +82,9 @@ jobs:
   lychee:
     name: Link checker
     runs-on: ubuntu-latest
-    continue-on-error: ${{ !inputs.fail-on-issue }}
+    # No job-level continue-on-error: a lychee startup, argument or
+    # configuration error must fail the caller (#54). Link findings follow
+    # fail-on-issue in the "Report link results" step below.
     steps:
       - uses: actions/checkout@v7
 
@@ -91,17 +95,81 @@ jobs:
           key: lychee-cache-${{ github.run_id }}
           restore-keys: lychee-cache-
 
+      - name: Build lychee arguments
+        id: args
+        env:
+          EXCLUDE: ${{ inputs.exclude }}
+          CHECK_EXTERNAL: ${{ inputs.check-external-links }}
+        run: |
+          # One --exclude-path per comma-separated entry: lychee reads each value as
+          # a regular expression, so "a/,b/" as one value would match nothing.
+          args="--cache --no-progress"
+          IFS=',' read -ra paths <<< "$EXCLUDE"
+          for path in "${paths[@]}"; do
+            path="${path#"${path%%[![:space:]]*}"}"; path="${path%"${path##*[![:space:]]}"}"
+            [ -n "$path" ] && args="$args --exclude-path '$path'"
+          done
+          if [ "$CHECK_EXTERNAL" != "true" ]; then
+            args="$args --exclude '^https?://'"
+          fi
+          echo "args=$args './**/*.md'" >> "$GITHUB_OUTPUT"
+
       - name: Run lychee
+        id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          args: >-
-            --cache
-            --no-progress
-            --exclude-path "${{ inputs.exclude }}"
-            ${{ inputs.check-external-links == false && '--exclude "^https?://"' || '' }}
-            --exclude-mail
-            "./**/*.md"
-          fail: ${{ inputs.fail-on-issue }}
+          # Pinned so that a lychee release cannot silently change or remove an
+          # option again (v0.24.2 dropped --exclude-mail; mail is excluded by default).
+          lycheeVersion: v0.24.2
+          args: ${{ steps.args.outputs.args }}
+          format: json
+          output: lychee/out.json
+          jobSummary: false
+          # The next step decides the outcome: lychee uses exit code 2 both for
+          # broken links and for invalid arguments.
+          fail: false
+          failIfEmpty: false
+
+      - name: Report link results
+        env:
+          EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
+          BLOCKING: ${{ inputs.fail-on-issue }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+
+          exit_code = os.environ.get("EXIT_CODE", "")
+          blocking = os.environ.get("BLOCKING") == "true"
+          summary = open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8")
+          try:
+              with open("lychee/out.json", encoding="utf-8") as handle:
+                  report = json.load(handle)
+          except (OSError, ValueError):
+              report = None
+          if not isinstance(report, dict) or not isinstance(report.get("errors"), int):
+              # lychee writes its report only after a completed run, so a missing or
+              # empty report is a startup, argument or configuration error.
+              print(f"::error::lychee did not complete (exit code {exit_code or 'unknown'}). "
+                    "Its arguments or configuration are invalid; see the 'Run lychee' step.")
+              summary.write("## Link checker\n\nlychee did not complete: tool or configuration error.\n")
+              sys.exit(1)
+          level = "error" if blocking else "warning"
+          for source, failures in sorted(report.get("error_map", {}).items()):
+              for failure in failures:
+                  status = failure.get("status", {})
+                  text = status.get("text", status) if isinstance(status, dict) else status
+                  print(f"::{level} file={source.removeprefix('./')}::{failure.get('url')}: {text}")
+          summary.write(
+              "## Link checker\n\n| Checked | OK | Excluded | Broken |\n|---|---|---|---|\n"
+              f"| {report.get('total', 0)} | {report.get('successful', 0)} | "
+              f"{report.get('excludes', 0)} | {report['errors']} |\n"
+          )
+          if report["errors"]:
+              mode = "blocking" if blocking else "advisory (fail-on-issue: false)"
+              print(f"{report['errors']} broken link(s); {mode}.")
+              sys.exit(1 if blocking else 0)
+          print(f"OK: {report.get('total', 0)} links, none broken.")
+          PY
 
   mermaid:
     name: Mermaid syntax

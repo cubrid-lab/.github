@@ -1,0 +1,22 @@
+# Runs the reusable doc-lint workflow on this repository's own Markdown whenever
+# it changes, so a broken invocation fails here before callers bump their pin
+# (#54: the link checker exited on a removed option for months and still passed).
+name: doc-lint self-test
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/doc-lint.yml"
+      - ".github/workflows/doc-lint-self-test.yml"
+      - "workflow-templates/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  doc-lint:
+    uses: ./.github/workflows/doc-lint.yml
+    with:
+      fail-on-issue: false
