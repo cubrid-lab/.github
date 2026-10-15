@@ -107,7 +107,8 @@ jobs:
           IFS=',' read -ra paths <<< "$EXCLUDE"
           for path in "${paths[@]}"; do
             path="${path#"${path%%[![:space:]]*}"}"; path="${path%"${path##*[![:space:]]}"}"
-            [ -n "$path" ] && args="$args --exclude-path '$path'"
+            # %q escapes the value for the action's eval (an apostrophe stays literal).
+            [ -n "$path" ] && args="$args --exclude-path $(printf '%q' "$path")"
           done
           if [ "$CHECK_EXTERNAL" != "true" ]; then
             args="$args --exclude '^https?://'"
@@ -146,29 +147,39 @@ jobs:
                   report = json.load(handle)
           except (OSError, ValueError):
               report = None
-          if not isinstance(report, dict) or not isinstance(report.get("errors"), int):
-              # lychee writes its report only after a completed run, so a missing or
-              # empty report is a startup, argument or configuration error.
-              print(f"::error::lychee did not complete (exit code {exit_code or 'unknown'}). "
-                    "Its arguments or configuration are invalid; see the 'Run lychee' step.")
-              summary.write("## Link checker\n\nlychee did not complete: tool or configuration error.\n")
+          # lychee exits 0 (all links accepted) or 2 (some rejected, timeouts
+          # included unless accept_timeouts) after a completed run. Anything else,
+          # or no report, is a startup, argument, configuration or later runtime
+          # error (lychee can fail saving its cache after writing the report).
+          completed = isinstance(report, dict) and isinstance(report.get("errors"), int)
+          if exit_code not in ("0", "2") or not completed:
+              print(f"::error::lychee failed (exit code {exit_code or 'unknown'}, "
+                    f"report {'written' if completed else 'missing'}): a tool, argument or "
+                    "configuration error, not a link finding; see the 'Run lychee' step.")
+              summary.write("## Link checker\n\nlychee failed: tool or configuration error.\n")
               sys.exit(1)
-          level = "error" if blocking else "warning"
-          for source, failures in sorted(report.get("error_map", {}).items()):
-              for failure in failures:
-                  status = failure.get("status", {})
-                  text = status.get("text", status) if isinstance(status, dict) else status
-                  print(f"::{level} file={source.removeprefix('./')}::{failure.get('url')}: {text}")
+          # Timeouts that lychee accepted (exit 0, accept_timeouts) are only warnings.
+          level = "error" if blocking and exit_code == "2" else "warning"
+          found = 0
+          for kind, key in (("broken", "error_map"), ("timed out", "timeout_map")):
+              for source, failures in sorted((report.get(key) or {}).items()):
+                  for failure in failures:
+                      found += 1
+                      status = failure.get("status", {})
+                      text = status.get("text", status) if isinstance(status, dict) else status
+                      print(f"::{level} file={source.removeprefix('./')}::{kind}: "
+                            f"{failure.get('url')}: {text}")
           summary.write(
-              "## Link checker\n\n| Checked | OK | Excluded | Broken |\n|---|---|---|---|\n"
+              "## Link checker\n\n| Checked | OK | Excluded | Broken | Timed out |\n"
+              "|---|---|---|---|---|\n"
               f"| {report.get('total', 0)} | {report.get('successful', 0)} | "
-              f"{report.get('excludes', 0)} | {report['errors']} |\n"
+              f"{report.get('excludes', 0)} | {report['errors']} | {report.get('timeouts', 0)} |\n"
           )
-          if report["errors"]:
+          if exit_code == "2":
               mode = "blocking" if blocking else "advisory (fail-on-issue: false)"
-              print(f"{report['errors']} broken link(s); {mode}.")
+              print(f"lychee rejected links ({found} annotated); {mode}.")
               sys.exit(1 if blocking else 0)
-          print(f"OK: {report.get('total', 0)} links, none broken.")
+          print(f"OK: {report.get('total', 0)} links accepted.")
           PY
 
   mermaid:

@@ -64,12 +64,15 @@ skips `http(s)://` URLs unless `check-external-links: true`; this weekly
 | Outcome | `fail-on-issue: false` | `fail-on-issue: true` |
 |---|---|---|
 | No broken links | Pass | Pass |
-| Broken links | Pass, with a warning annotation per link and a job-summary table | Fail, with an error annotation per link |
-| lychee did not complete: invalid argument, invalid `lychee.toml`, crash | **Fail** | **Fail** |
+| Broken or timed-out links (lychee exit 2) | Pass, with a warning annotation per link and a job-summary table | Fail, with an error annotation per link |
+| lychee failed: invalid argument, invalid `lychee.toml`, crash, or any exit code other than 0 or 2 | **Fail** | **Fail** |
 
-lychee writes its report only after a completed run, so a missing or empty report
-is a tool or configuration error. lychee's exit code cannot tell the two apart (2
-means both "invalid argument" and "broken link"). The lychee version is pinned
+A completed run exits 0 or 2 and writes a JSON report; anything else, or a
+missing report, is a tool or configuration error. The exit code alone is not
+enough (2 means both "invalid argument" and "rejected link"), and neither is the
+report alone (lychee can still fail after writing it, while saving its cache).
+Timeouts count as rejected links unless the caller's `lychee.toml` sets
+`accept_timeouts`. The lychee version is pinned
 (`lycheeVersion: v0.24.2`), so an upstream release cannot remove an option the
 workflow passes; v0.24.2 removed `--exclude-mail`, which made every earlier run stop
 before checking a link while the job still reported success (#54). Each
