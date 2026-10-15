@@ -139,6 +139,14 @@ jobs:
           python3 - <<'PY'
           import json, os, sys
 
+          def message(text):
+              # Workflow-command data encoding: a value from the report (a file name,
+              # URL or status) must never end the annotation and start another command.
+              return str(text).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+          def prop(text):
+              return message(text).replace(":", "%3A").replace(",", "%2C")
+
           exit_code = os.environ.get("EXIT_CODE", "")
           blocking = os.environ.get("BLOCKING") == "true"
           summary = open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8")
@@ -167,8 +175,8 @@ jobs:
                       found += 1
                       status = failure.get("status", {})
                       text = status.get("text", status) if isinstance(status, dict) else status
-                      print(f"::{level} file={source.removeprefix('./')}::{kind}: "
-                            f"{failure.get('url')}: {text}")
+                      print(f"::{level} file={prop(source.removeprefix('./'))}::"
+                            + message(f"{kind}: {failure.get('url')}: {text}"))
           summary.write(
               "## Link checker\n\n| Checked | OK | Excluded | Broken | Timed out |\n"
               "|---|---|---|---|---|\n"
@@ -237,5 +245,5 @@ jobs:
           if [ "${{ inputs.fail-on-issue }}" = "true" ]; then
             echo "Mode: **blocking** — failures will prevent merge." >> $GITHUB_STEP_SUMMARY
           else
-            echo "Mode: **advisory** — issues reported but won't block." >> $GITHUB_STEP_SUMMARY
+            echo "Mode: **advisory** — issues reported but won't block; a link-checker tool or configuration error still fails." >> $GITHUB_STEP_SUMMARY
           fi

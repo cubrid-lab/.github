@@ -72,7 +72,9 @@ missing report, is a tool or configuration error. The exit code alone is not
 enough (2 means both "invalid argument" and "rejected link"), and neither is the
 report alone (lychee can still fail after writing it, while saving its cache).
 Timeouts count as rejected links unless the caller's `lychee.toml` sets
-`accept_timeouts`. The lychee version is pinned
+`accept_timeouts`. GitHub shows only the first annotations of a step (10 per
+level); the step log lists every link. Report values are encoded before they are
+written as annotations, so a file name or URL cannot inject a workflow command. The lychee version is pinned
 (`lycheeVersion: v0.24.2`), so an upstream release cannot remove an option the
 workflow passes; v0.24.2 removed `--exclude-mail`, which made every earlier run stop
 before checking a link while the job still reported success (#54). Each
