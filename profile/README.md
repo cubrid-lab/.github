@@ -1,3 +1,9 @@
+<!-- CUBRID-LAB-ORGANIZATION-MARK:START -->
+<p align="center">
+  <a href="https://github.com/cubrid-lab/brand"><img src="https://raw.githubusercontent.com/cubrid-lab/brand/7c60394d5d259941390434ecbe6fb2cc74a28984/dist/organization/mark.svg" alt="CUBRID Lab organization emblem" width="120"></a>
+</p>
+<!-- CUBRID-LAB-ORGANIZATION-MARK:END -->
+
 # CUBRID Lab
 
 <div align="center">
@@ -67,7 +73,7 @@ Version badges show each project's latest published release (PyPI, npm or GitHub
 | **[cubrid-cookbook-python](https://github.com/cubrid-lab/cubrid-cookbook-python)** | Production-ready Python examples — quickstarts, migration guides, templates | ![active](https://img.shields.io/badge/-active%20development-yellow) |
 | **[cubrid-benchmark](https://github.com/cubrid-lab/cubrid-benchmark)** | Scientific benchmark suite — reproducible experiments, automated comparison | ![active](https://img.shields.io/badge/-active%20development-yellow) |
 | **[showcase](https://github.com/cubrid-lab/showcase)** | Contest entries, presentations, demo materials and promotional content for the Python ecosystem | ![active](https://img.shields.io/badge/-active%20development-yellow) |
-| **[brand](https://github.com/cubrid-lab/brand)** | Brand-system source — role symbols and language color tokens. The organization emblem and wordmark are still under design review | ![active](https://img.shields.io/badge/-active%20development-yellow) |
+| **[brand](https://github.com/cubrid-lab/brand)** | Brand-system source — role symbols and language color tokens. The organization emblem is approved for organization use; wordmark review and general visual-asset licensing remain pending | ![active](https://img.shields.io/badge/-active%20development-yellow) |
 
 ### Infrastructure
 
@@ -115,6 +121,8 @@ We welcome contributions! Please see [CONTRIBUTING.md](https://github.com/cubrid
 ## License
 
 All projects are licensed under the **MIT License**. See individual repositories for details.
+
+**Visual identity:** The organization emblem is authorized for CUBRID Lab organization use; general redistribution rights for visual brand assets remain pending. See the [brand usage and licensing guidance](https://github.com/cubrid-lab/brand/blob/main/BRAND_USAGE.md).
 
 ---
 
