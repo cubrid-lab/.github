@@ -48,11 +48,11 @@ Runner-port flakes (`address already in use` on 33000) are re-runs, not code pro
 
 ## Labels
 
-Source of truth: [`.github/labels.yml`](.github/labels.yml) · sync: `python scripts/sync_labels.py` · weekly drift audit: `label-audit` workflow (needs `LABEL_AUDIT_TOKEN`, read-only, deletion stays a human call). Rules: spaced-colon prefixes, escape-hatch labels share one color, `good first issue` / `help wanted` are maintainer promises (never auto-applied). See the table in [CONTRIBUTING.md](CONTRIBUTING.md).
+Source of truth: [`.github/labels.yml`](../.github/labels.yml) · sync: `python scripts/sync_labels.py` · weekly drift audit: `label-audit` workflow (needs `LABEL_AUDIT_TOKEN`, read-only, deletion stays a human call). Rules: spaced-colon prefixes, escape-hatch labels share one color, `good first issue` / `help wanted` are maintainer promises (never auto-applied). See the table in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ## Translations
 
-Policy in [AGENTS.md](AGENTS.md#translation-policy-cubrid-lab-org): English canonical; 한국어 required-to-sync (hard gate, time-boxed for the contest — relax after 2026 finals, see the reminder issue); de/hi/ru/zh community translations with advisory drift warnings and maintainer-side resync PRs. Every translated file carries a sync marker blockquote.
+Policy in [AGENTS.md](../AGENTS.md#translation-policy-cubrid-lab-org): English canonical; 한국어 required-to-sync (hard gate, time-boxed for the contest — relax after 2026 finals, see the reminder issue); de/hi/ru/zh community translations with advisory drift warnings and maintainer-side resync PRs. Every translated file carries a sync marker blockquote.
 
 ## Licensing & attribution (verified 2026-09)
 
