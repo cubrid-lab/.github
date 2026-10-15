@@ -54,6 +54,34 @@ exclude = [
 exclude_path = ["./vendor", "./node_modules"]
 ```
 
+## Pull-request link check in `doc-lint.yml`
+
+The reusable `doc-lint.yml` workflow (Markdown style, links, Mermaid) runs its own
+lychee job on pull requests. It checks local file links in every `*.md` file and
+skips `http(s)://` URLs unless `check-external-links: true`; this weekly
+`link-check.yml` workflow checks external URLs.
+
+| Outcome | `fail-on-issue: false` | `fail-on-issue: true` |
+|---|---|---|
+| No broken links | Pass | Pass |
+| Broken or timed-out links (lychee exit 2) | Pass, with a warning annotation per link and a job-summary table | Fail, with an error annotation per link |
+| lychee failed: invalid argument, invalid `lychee.toml`, crash, or any exit code other than 0 or 2 | **Fail** | **Fail** |
+
+A completed run exits 0 or 2 and writes a JSON report; anything else, or a
+missing report, is a tool or configuration error. The exit code alone is not
+enough (2 means both "invalid argument" and "rejected link"), and neither is the
+report alone (lychee can still fail after writing it, while saving its cache).
+Timeouts count as rejected links unless the caller's `lychee.toml` sets
+`accept_timeouts`. GitHub shows only the first annotations of a step (10 per
+level); the step log lists every link. Report values are encoded before they are
+written as annotations, so a file name or URL cannot inject a workflow command. The lychee version is pinned
+(`lycheeVersion: v0.24.2`), so an upstream release cannot remove an option the
+workflow passes; v0.24.2 removed `--exclude-mail`, which made every earlier run stop
+before checking a link while the job still reported success (#54). Each
+comma-separated `exclude` entry becomes its own `--exclude-path` regular
+expression. `doc-lint-self-test.yml` runs the workflow on this repository whenever
+it changes.
+
 ## Adding link-check to a new product repo
 
 1. Drop the caller workflow shown above into `.github/workflows/link-check.yml`.

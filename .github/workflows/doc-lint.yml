@@ -15,8 +15,10 @@
 #       exclude: "node_modules/,vendor/,typescript/"   # optional
 #       mermaid-scanner-version: "v1"                   # optional, pins scanner
 #
-# The workflow is advisory (continue-on-error) during the initial rollout.
-# After the backlog of existing issues is fixed, flip fail-on-issue to true.
+# Markdown style and Mermaid findings are advisory (continue-on-error) during the
+# initial rollout; after the backlog is fixed, flip fail-on-issue to true. Broken
+# links follow fail-on-issue too, but a link-checker tool or configuration error
+# always fails the job.
 
 name: Documentation Lint
 
@@ -80,7 +82,9 @@ jobs:
   lychee:
     name: Link checker
     runs-on: ubuntu-latest
-    continue-on-error: ${{ !inputs.fail-on-issue }}
+    # No job-level continue-on-error: a lychee startup, argument or
+    # configuration error must fail the caller (#54). Link findings follow
+    # fail-on-issue in the "Report link results" step below.
     steps:
       - uses: actions/checkout@v7
 
@@ -91,17 +95,100 @@ jobs:
           key: lychee-cache-${{ github.run_id }}
           restore-keys: lychee-cache-
 
+      - name: Build lychee arguments
+        id: args
+        env:
+          EXCLUDE: ${{ inputs.exclude }}
+          CHECK_EXTERNAL: ${{ inputs.check-external-links }}
+        run: |
+          # One --exclude-path per comma-separated entry: lychee reads each value as
+          # a regular expression, so "a/,b/" as one value would match nothing.
+          args="--cache --no-progress"
+          IFS=',' read -ra paths <<< "$EXCLUDE"
+          for path in "${paths[@]}"; do
+            path="${path#"${path%%[![:space:]]*}"}"; path="${path%"${path##*[![:space:]]}"}"
+            # %q escapes the value for the action's eval (an apostrophe stays literal).
+            [ -n "$path" ] && args="$args --exclude-path $(printf '%q' "$path")"
+          done
+          if [ "$CHECK_EXTERNAL" != "true" ]; then
+            args="$args --exclude '^https?://'"
+          fi
+          echo "args=$args './**/*.md'" >> "$GITHUB_OUTPUT"
+
       - name: Run lychee
+        id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          args: >-
-            --cache
-            --no-progress
-            --exclude-path "${{ inputs.exclude }}"
-            ${{ inputs.check-external-links == false && '--exclude "^https?://"' || '' }}
-            --exclude-mail
-            "./**/*.md"
-          fail: ${{ inputs.fail-on-issue }}
+          # Pinned so that a lychee release cannot silently change or remove an
+          # option again (v0.24.2 dropped --exclude-mail; mail is excluded by default).
+          lycheeVersion: v0.24.2
+          args: ${{ steps.args.outputs.args }}
+          format: json
+          output: lychee/out.json
+          jobSummary: false
+          # The next step decides the outcome: lychee uses exit code 2 both for
+          # broken links and for invalid arguments.
+          fail: false
+          failIfEmpty: false
+
+      - name: Report link results
+        env:
+          EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
+          BLOCKING: ${{ inputs.fail-on-issue }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+
+          def message(text):
+              # Workflow-command data encoding: a value from the report (a file name,
+              # URL or status) must never end the annotation and start another command.
+              return str(text).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+          def prop(text):
+              return message(text).replace(":", "%3A").replace(",", "%2C")
+
+          exit_code = os.environ.get("EXIT_CODE", "")
+          blocking = os.environ.get("BLOCKING") == "true"
+          summary = open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8")
+          try:
+              with open("lychee/out.json", encoding="utf-8") as handle:
+                  report = json.load(handle)
+          except (OSError, ValueError):
+              report = None
+          # lychee exits 0 (all links accepted) or 2 (some rejected, timeouts
+          # included unless accept_timeouts) after a completed run. Anything else,
+          # or no report, is a startup, argument, configuration or later runtime
+          # error (lychee can fail saving its cache after writing the report).
+          completed = isinstance(report, dict) and isinstance(report.get("errors"), int)
+          if exit_code not in ("0", "2") or not completed:
+              print(f"::error::lychee failed (exit code {exit_code or 'unknown'}, "
+                    f"report {'written' if completed else 'missing'}): a tool, argument or "
+                    "configuration error, not a link finding; see the 'Run lychee' step.")
+              summary.write("## Link checker\n\nlychee failed: tool or configuration error.\n")
+              sys.exit(1)
+          # Timeouts that lychee accepted (exit 0, accept_timeouts) are only warnings.
+          level = "error" if blocking and exit_code == "2" else "warning"
+          found = 0
+          for kind, key in (("broken", "error_map"), ("timed out", "timeout_map")):
+              for source, failures in sorted((report.get(key) or {}).items()):
+                  for failure in failures:
+                      found += 1
+                      status = failure.get("status", {})
+                      text = status.get("text", status) if isinstance(status, dict) else status
+                      print(f"::{level} file={prop(source.removeprefix('./'))}::"
+                            + message(f"{kind}: {failure.get('url')}: {text}"))
+          summary.write(
+              "## Link checker\n\n| Checked | OK | Excluded | Broken | Timed out |\n"
+              "|---|---|---|---|---|\n"
+              f"| {report.get('total', 0)} | {report.get('successful', 0)} | "
+              f"{report.get('excludes', 0)} | {report['errors']} | {report.get('timeouts', 0)} |\n"
+          )
+          if exit_code == "2":
+              mode = "blocking" if blocking else "advisory (fail-on-issue: false)"
+              print(f"lychee rejected links ({found} annotated); {mode}.")
+              sys.exit(1 if blocking else 0)
+          print(f"OK: {report.get('total', 0)} links accepted.")
+          PY
 
   mermaid:
     name: Mermaid syntax
@@ -158,5 +245,5 @@ jobs:
           if [ "${{ inputs.fail-on-issue }}" = "true" ]; then
             echo "Mode: **blocking** — failures will prevent merge." >> $GITHUB_STEP_SUMMARY
           else
-            echo "Mode: **advisory** — issues reported but won't block." >> $GITHUB_STEP_SUMMARY
+            echo "Mode: **advisory** — issues reported but won't block; a link-checker tool or configuration error still fails." >> $GITHUB_STEP_SUMMARY
           fi
