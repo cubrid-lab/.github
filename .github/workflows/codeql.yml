@@ -8,6 +8,15 @@ on:
         required: false
         default: 'python'
         type: string
+      category:
+        description: >-
+          Code scanning category of the upload, for example /language:go. Give
+          each analysis of one repository its own category when a repository
+          calls this workflow more than once; two analyses in one category
+          replace each other's alerts. Empty keeps the default category.
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -27,3 +36,5 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
+        with:
+          category: ${{ inputs.category }}
