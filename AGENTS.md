@@ -18,14 +18,32 @@ This repository holds organization-wide community health files for `cubrid-lab`.
 
 ## Development Workflow (cubrid-lab org standard)
 
-All non-trivial work across cubrid-lab repositories MUST follow this 4-phase cycle:
+Every contribution follows the same review and merge process, **regardless of
+whether code was written by a person, OpenCode, Codex, Claude Code, ChatGPT,
+Copilot, or another agent**. The canonical policy is in
+[CONTRIBUTING.md](CONTRIBUTING.md#pull-request-process).
 
-1. **Oracle Design Review** — Consult Oracle before implementation to validate architecture, API surface, and approach. Raise concerns early.
-2. **Implementation** — Build the feature/fix with tests. Follow existing codebase patterns.
-3. **Documentation Update** — Update ALL affected docs (README, CHANGELOG, ROADMAP, API docs, SUPPORT_MATRIX, PRD, etc.) in the same PR or as an immediate follow-up. Code without doc updates is incomplete.
-4. **Oracle Post-Implementation Review** — Consult Oracle to review the completed work for correctness, edge cases, and consistency before merging.
+1. **Scope and implementation** — Keep an issue/PR focused. Include tests and
+   affected documentation in the PR; explain when documentation does not change.
+2. **GitHub CI** — Treat the repository's required GitHub Actions checks as the
+   authoritative verification record. Run applicable formatting, lint, tests,
+   documentation, security and integration/live checks. Local checks are
+   encouraged but do not replace required CI and are not a separate gate.
+3. **Code review** — Assess behavior, tests, scope, maintainability and
+   security. Optional reviews from Oracle, Copilot, `agent-review` and other AI
+   tools are advisory evidence, not required by implementation tool and never a
+   substitute for maintainer judgment.
+4. **Final verification and merge** — Recheck the final PR head and required CI;
+   resolve or document actionable findings. The responsible maintainer decides
+   whether to merge. An independent maintainer approval is required for
+   security-sensitive, release/publishing, or high-impact CI/permission changes,
+   where available; never silently weaken existing repository protections.
 
-Skipping any phase requires explicit justification. Trivial changes (typos, single-line fixes) may skip phases 1 and 4.
+Avoid mandatory Oracle pre/post reviews, Copilot reviews, fixed AI review-round
+budgets or separate approval routes based on the tool used. Existing branch
+rulesets, security controls, release safeguards and repository-specific
+test commands remain authoritative; changes to those controls need their own
+reviewed PR.
 
 ## Validation
 - Manually review Markdown rendering and link targets.
@@ -132,7 +150,7 @@ pycubrid 최적화 결과 +10% 이상이면 계속, 미만이면 Go/TS 성과 �
 2. **한 이슈에 한 사람.** 같은 이슈에 두 사람이 동시에 작업하지 않는다.
 3. **같은 파일 수정 금지.** 서로 다른 이슈더라도 같은 파일을 동시에 수정하면 충돌. 의심되면 먼저 PR 올린 사람이 우선.
 4. **Branch naming**: `{username}/{issue-number}-short-description` (예: `jay/19-profiling`)
-5. **PR 리뷰 필수.** 본인 PR은 상대방이 리뷰. self-merge 금지.
+5. **PR 검토 및 병합.** 필수 GitHub CI 결과와 변경 영향을 확인한 후 책임 Maintainer가 병합을 결정한다. 보안·배포 등 고위험 변경은 독립적인 Maintainer 검토를 거친다.
 6. **Phase 순서 존중.** Backlog에 있는 이슈는 해당 Phase의 선행 이슈가 Done이 될 때까지 착수하지 않는다.
 
 ### Parallel Work Guidelines
