@@ -15,6 +15,7 @@
 2. Keep terminology consistent across all community files.
 3. If you add a new policy, update the most relevant existing document instead of creating redundant guidance.
 4. Check for broken links and obvious formatting regressions before committing.
+5. Apply the unified PR process from root CONTRIBUTING.md without introducing tool-specific mandatory Oracle/Copilot review routes; use actual repo CI commands and keep security/release safeguards.
 
 ## Validation
 - Review Markdown files with `rg -n '^#|^##|^###' *.md profile/README.md`.
