@@ -80,8 +80,7 @@ Follow this format for all commits:
 
 <optional body>
 
-Ultraworked with [Sisyphus](https://github.com/code-yeongyu/oh-my-opencode)
-Co-authored-by: Your Name <your.email@example.com>
+Co-authored-by: Contributor Name <contributor@example.com>
 ```
 
 **Types:**
@@ -109,12 +108,40 @@ Resolves issue where NULL values in conflict resolution caused type errors.
 
 ## Pull Request Process
 
-1. Ensure all tests pass locally
-2. Ensure code coverage meets repository threshold (typically 95%+)
-3. Ensure linting and formatting pass
-4. Request review from maintainers
-5. Address feedback and push updates
-6. Rebase and merge once approved
+The same process applies to all contributions regardless of implementation tool
+(human-authored, OpenCode, Codex, Claude Code, Copilot, ChatGPT, or other agents).
+No contributor is required to install or obtain a review from a particular AI tool.
+
+1. **Create a focused PR.** Describe why the change is needed, what it changes,
+   its tests, and any affected documentation. Contributors may work on unclaimed
+   issues without prior assignment, subject to the repository's coordination rules.
+2. **Validate through GitHub CI.** Required GitHub Actions checks are the
+   authoritative test result. They must pass on the final relevant head before
+   merge, including repository-appropriate lint, format, unit, integration/live,
+   security and documentation checks. For forks awaiting Actions approval, a
+   maintainer reviews the proposed changes before allowing workflows to run.
+   Local tests are helpful and should be reported honestly but are not an
+   additional mandatory gate.
+3. **Review the changes.** Reviewers assess correctness, tests, risk, security,
+   maintainability and scope. AI-assisted code review (Oracle, Copilot,
+   `agent-review`, etc.) is optional and advisory only. Bot summaries or green
+   CI never imply a maintainer approval.
+4. **Address findings.** Correct verified defects, record accepted exceptions or
+   follow-ups, and rerun required checks after updates. Do not merge with
+   unresolved critical/security defects or failing required checks.
+5. **Maintainer merge decision.** The responsible maintainer confirms the final
+   head, required checks, review outcome and any project-specific release
+   requirements. Security-sensitive, high-impact workflow/permission and
+   publishing changes require an independent maintainer's approval when
+   applicable. Keep existing branch protections; adjust them only via an
+   intentional, separately reviewed repository-specific change.
+
+Each repository documents its own test commands and risk-sensitive paths. The
+**review criteria** stay the same across repositories, even when CI runner
+infrastructure differs. Use squash merge where repository rulesets prescribe it.
+
+Tool attribution is optional and should be factual; do not add generic,
+tool-specific commit footers to every contribution.
 
 ## License
 
