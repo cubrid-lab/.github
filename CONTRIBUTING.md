@@ -19,7 +19,7 @@ Thank you for your interest in contributing to CUBRID Labs! We welcome contribut
 
 ### Pull Requests
 
-1. **Fork** the repository and create a feature branch from `main`
+1. **Fork** the repository and create a focused branch from its current default branch
 2. **Develop** your changes with clear, focused commits
 3. **Test** your changes (see repository-specific docs)
 4. **Document** your changes with comments and docstrings
@@ -79,8 +79,6 @@ Follow this format for all commits:
 <type>: <description>
 
 <optional body>
-
-Co-authored-by: Contributor Name <contributor@example.com>
 ```
 
 **Types:**
@@ -105,6 +103,21 @@ fix: handle NULL values in ON DUPLICATE KEY UPDATE
 
 Resolves issue where NULL values in conflict resolution caused type errors.
 ```
+
+## Issue intake and ownership
+
+File issues in the repository that owns the change, not in a central development
+tracker. New reports start as `status: needs triage`: maintainers confirm the
+problem, duplicates, issue type, scope and relative priority against the local
+open backlog. The exact labels are `priority: critical/high/medium/low` and
+`size: XS/S/M/L/XL`; only after checking the saved labels and review outcome
+may they remove the triage status. Issue priority is not PR approval or job
+readiness.
+
+Outside contributors can work on unclaimed issues without prior assignment.
+Maintainer-operated autonomous agents must have authorization and a confirmed
+assignee before implementing internal tasks; check existing PRs before starting.
+Issue templates/automation and exceptions belong to the individual repository.
 
 ## Pull Request Process
 
@@ -140,12 +153,13 @@ Each repository documents its own test commands and risk-sensitive paths. The
 **review criteria** stay the same across repositories, even when CI runner
 infrastructure differs. Use squash merge where repository rulesets prescribe it.
 
-Tool attribution is optional and should be factual; do not add generic,
-tool-specific commit footers to every contribution.
+Tool attribution is optional and should be factual; add a coauthor trailer only
+for a real contributor and only when permitted by the target project. Do not
+insert named agent credits or boilerplate trailers in every commit.
 
 ## License
 
-All contributions are licensed under the **MIT License**. By contributing, you agree to license your work under these terms.
+Contributions follow the **license of the target repository** (for example, the CUBRID engine and individual drivers may use different licenses). Check that repository's `LICENSE` and contribution requirements before submitting; do not assume every CUBRID Lab project uses MIT.
 
 ## Code of Conduct
 
