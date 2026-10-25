@@ -45,11 +45,44 @@ rulesets, security controls, release safeguards and repository-specific
 test commands remain authoritative; changes to those controls need their own
 reviewed PR.
 
+## Issue intake and autonomous agent work
+
+The rules here describe a **shared decision process**, not a mandatory
+cross-repository tool or a new CI gate. Each repository's own `AGENTS.md`,
+`CONTRIBUTING.md`, tests, code ownership and safety/release rules determine
+the actual implementation commands and any additional approvals.
+
+- **Before filing:** verify the problem against current code, open/recently
+  closed issues and overlapping PRs. File a focused, testable issue only in
+  the repository whose code or documentation needs to change.
+- **Triage:** newly filed issues enter `status: needs triage`. Review validity,
+  duplicates, type, scope, readiness and all open issues **in that repository**.
+  Confirm one `priority: critical/high/medium/low` and one existing
+  `size: XS/S/M/L/XL`; priority measures urgency, size estimates effort.
+  Read back saved GitHub labels before clearing the triage status. Do not
+  automate severity guesses or clear triage based on labels alone.
+- **Ownership:** outside human contributors can report or improve unclaimed
+  work without preapproval or mandatory self-assignment. Maintainer-operated
+  autonomous agents need explicit authorization and a verified GitHub assignee
+  before implementing internally assigned work; coordinate with the owner
+  of any overlapping PR.
+- **Implementation:** use the smallest change meeting checked acceptance
+  criteria. Do not introduce speculative abstractions, mandatory AI review
+  stages, extra CI gates or generic infrastructure for a documentation fix.
+- **Completion:** report real checks run, skipped checks and residual risk.
+  Required final-head CI and maintainer review decide merge readiness; after
+  merge, reconcile only genuinely superseded issues and PRs.
+
 ## Validation
 - Manually review Markdown rendering and link targets.
 - If examples or command snippets change, verify they still match current org conventions.
 
-## Project Context — Performance Loop System
+## Historical project context — Performance Loop System
+
+The following dated plan and team agreements record an earlier initiative.
+They are **not organization-wide contribution prerequisites, active issue
+triage gates or restrictions on independent repository work**. Preserve the
+history, but use current repository-specific issues and requirements for work.
 
 > **Board**: [CUBRID Ecosystem Roadmap](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only)
 
@@ -142,7 +175,13 @@ pycubrid 최적화 결과 +10% 이상이면 계속, 미만이면 Go/TS 성과 �
 4. one-command 재현 데모 (`docker compose up && make demo`)
 5. 증거팩 (차트, 보고서)
 
-## Team Coordination (2-Person Team)
+## Historical team coordination (2-Person Team)
+
+The notes below describe a past, internally coordinated team process. They do
+not require outside contributors to obtain an assignee, prohibit legitimate
+collaboration, impose a fixed branch prefix, or block unrelated upstream and
+downstream contributions. Active ownership is established by the target
+repository's actual GitHub issue, PRs and maintainer guidance.
 
 ### Rules
 
