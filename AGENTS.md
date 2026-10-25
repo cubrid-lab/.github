@@ -129,6 +129,30 @@ Releases, docs sites, CI gates, secrets, and the gotchas behind them:
 [docs/OPERATIONS.md](docs/OPERATIONS.md). Update it in the same PR that
 changes any release/docs/CI convention.
 
+## Issue intake and maintainer triage
+
+For issues filed **in this repository**, begin with `status: needs triage`;
+`issues: opened` automation marks external submissions. Issue forms also
+carry the status, and agents creating issues through `GITHUB_TOKEN` must
+explicitly set it on creation because those events may not retrigger Actions.
+
+1. Verify the problem, evidence or unknowns, duplicates (including open PRs),
+   scope, issue type, acceptance and actual dependencies; close invalid or
+   duplicate requests with a reason.
+2. Compare **all open issues in this repository** before assigning relative
+   urgency, taking account of current priorities, security, blocked work and
+   impact. Explain when another priority must change.
+3. Assign one `priority: critical/high/medium/low` and one existing
+   `size: XS/S/M/L/XL`, preserving unrelated labels and assignees. Split
+   overlarge implementation tasks when independently verifiable.
+4. Re-fetch actual issue labels, confirm validity, type, priority and size,
+   then remove `status: needs triage` manually. Never let a workflow choose
+   priority, close duplicates or clear triage based only on label presence.
+
+These issue-management rules do not change the organization label catalog
+or authorize cross-repository master trackers. Every other repository owns
+its issue decisions and can adopt the same workflow independently.
+
 ## Label Rules (cubrid-lab org)
 
 Source of truth: [`.github/labels.yml`](.github/labels.yml) — sync with

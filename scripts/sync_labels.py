@@ -20,7 +20,9 @@ from urllib.parse import quote
 import yaml
 
 ORGSPEC = Path(__file__).resolve().parents[1] / ".github" / "labels.yml"
-REPOS = ["pycubrid", "sqlalchemy-cubrid", "cubrid-mcp-server", "cubrid-cookbook-python"]
+# Issue-enabled repositories only; cubrid-lab/cubrid currently has Issues disabled.
+# Each repository owns its work; this list synchronizes label names/colors only.
+REPOS = [".github","brand","cubrid-benchmark","cubrid-client","cubrid-cookbook-python","cubrid-go","cubrid-kubernetes-operator","cubrid-lab.github.io","cubrid-mcp-server","cubrid-rs","drizzle-cubrid","gorm-cubrid","pycubrid","sea-orm-cubrid","showcase","sqlalchemy-cubrid","terraform-zadara-k8s"]
 
 
 def gh(*args: str) -> dict | list | None:
