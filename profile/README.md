@@ -1,6 +1,6 @@
 <!-- CUBRID-LAB-ORGANIZATION-MARK:START -->
 <p align="center">
-  <a href="https://github.com/cubrid-lab/brand"><img src="https://raw.githubusercontent.com/cubrid-lab/brand/7c60394d5d259941390434ecbe6fb2cc74a28984/dist/organization/mark.svg" alt="CUBRID Lab organization emblem" width="120"></a>
+  <a href="https://github.com/cubrid-lab/brand"><img src="https://raw.githubusercontent.com/cubrid-lab/brand/538bad3929bb661ee95774119cf3b9b4aebc7f15/dist/organization/mark.svg" alt="CUBRID Lab organization emblem" width="120"></a>
 </p>
 <!-- CUBRID-LAB-ORGANIZATION-MARK:END -->
 
