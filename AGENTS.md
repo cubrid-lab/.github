@@ -9,6 +9,11 @@ This repository holds organization-wide community health files for `cubrid-lab`.
 - `SECURITY.md`
 - `SUPPORT.md`
 - `docs/agent-playbook.md`
+- `docs/ISSUE_PR_COMMIT_STANDARD.md`
+
+## Issue, PR, and commit writing
+
+Follow [the organization writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md). Issue titles use a type-only prefix such as `feat:` or `bug:` (no module scope required); PR titles and commits retain Conventional Commits as permitted by the local validator. Distinguish issue goals, triage decisions, PR evidence and CI checks; preserve repository-specific exceptions.
 
 ## Working Rules
 - Treat this repo as policy and template infrastructure, not product code.
