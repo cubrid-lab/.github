@@ -4,7 +4,7 @@ Thank you for your interest in contributing to CUBRID Labs! We welcome contribut
 
 ## Issue, PR, and commit titles
 
-See [the shared writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md): Issues use a type-only goal/problem prefix (`feat:`, `bug:`, `docs:`, `test:`, etc.), without required module scopes; PRs and commits use Conventional Commits, subject to repository-specific PR validators. Use reproducible evidence and verifiable acceptance criteria for issues; use actual changes and test results for PRs. Triage owns validity, relative priority and size, while CI owns syntactic checks and code quality gates.
+See [the shared writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md): All issues use a type-only goal/problem prefix (`feat:`, `bug:`, `docs:`, `test:`, `chore:`, `ci:` as appropriate), without required module scopes. Keep the prefix when making a title easier to read, and audit existing issues without erasing evidence or history. PRs and commits use Conventional Commits, subject to repository-specific PR validators. Use reproducible evidence and verifiable acceptance criteria for issues; use actual changes and test results for PRs. Triage owns validity, relative priority and size, while CI owns syntactic checks and code quality gates.
 
 ## How to Contribute
 
