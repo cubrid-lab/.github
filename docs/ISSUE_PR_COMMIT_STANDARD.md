@@ -36,7 +36,8 @@ ci: verify release workflows before publishing
 ## 3. Pull request: describe the implemented change
 
 - Use **Conventional Commits** for PR titles where supported, e.g. `feat(placement): enforce node anti-affinity for HA members`, `fix(controller): avoid duplicate reconciliations`, `docs: clarify installation prerequisites`.
-- A PR title describes what was actually changed, not only the desired result from the issue. A meaningful scope is allowed but not required unless the repository-specific validator demands it.
+- A PR title describes what was actually changed, not only the desired result from the issue. A meaningful scope is allowed but not required unless the repository-specific validator demands it. Prefer a meaningful behavior or change over an opaque scenario, test-lane, or project-internal code; place such identifiers in the body when useful.
+- Keep PR descriptions readable for someone outside the immediate implementation: lead with the motivation and behavior changed, then summarize important changes, validation actually performed, known limits/follow-ups, and related issues. Put raw logs and long test-by-test evidence in collapsible details or linked artifacts when needed; do not bury the result in template repetition or agent-generated narration. Avoid boilerplate AI author credits or automated-review marketing in permanent descriptions.
 - Include motivation, changed behavior, related issue (`Closes #N` or `Refs #N` as applicable), test results actually observed, skipped validation, backwards compatibility and notable risks. Do not treat automated or AI-assisted review as a substitute for verified tests.
 - PR CI checks the PR title format and repository-specific quality gates. It must not automatically decide issue validity, impact, effort, or acceptance-criteria completion.
 - Preserve existing local PR-title validators and branch protections; do not change them merely to standardize issue titles.
