@@ -12,16 +12,18 @@ bug: prevent duplicate reconciliations after leader changes
 docs: explain the supported upgrade procedure
 test: verify recovery after node power loss
 chore: refresh dependency support matrix
+ci: verify release workflows before publishing
 ```
 
-- Use `feat:` for a new capability, `bug:` for observed defects, and `docs:`, `test:`, `chore:` when appropriate. Keep the prefix lowercase, followed by one space.
+- **Every issue title needs a type prefix.** Use `feat:` for a new capability, `bug:` for observed defects, and `docs:`, `test:`, `chore:`, or `ci:` as appropriate. Keep the prefix lowercase, followed by one space; do not drop it when making a title more human-readable.
 - **Issue `bug:` intentionally differs from Conventional Commits `fix:`**: bug describes an unresolved problem, whereas fix describes a completed change.
 - The goal or observed behavior must be specific, human-readable, searchable and understandable without internal project knowledge. Prefer "what should happen" or "what fails" over implementation guesses.
 - Do not require `type(scope):` in an issue. Do not add private review codes, milestone/test IDs, agent bookkeeping, personal notes, named maintainer comments or ambiguous abbreviations solely to the title/body.
 - For a reported bug, distinguish observed facts, reproduction steps, expected/actual outcomes and the environment. If it is not reproduced, explicitly state the limitation.
 - For a feature, explain the motivation, expected behavior and **observable acceptance criteria**, including necessary constraints. Tests should demonstrate the behavior they can actually exercise; simulated tests are not evidence of real-cluster scheduling, availability or persistence.
 - Avoid prescribing detailed implementation or listing individual files until it is needed for a validated design; keep alternatives and unresolved decisions clear. Keep a small documentation/task issue short rather than forcing a lengthy template.
-- Existing issues need not be retitled en masse. Improve active titles when they are unclear or the issue is being triaged; preserve valuable history.
+- Apply the same convention across all `cubrid-lab` repositories, including issue forms, repository-specific agent instructions, and existing issues. Audit open issues regularly and correct missing or inaccurate type prefixes and opaque titles. During an explicitly requested retrospective cleanup, review closed issues as well. Preserve issue meaning, technical evidence, internal identifiers in the body, links, labels, ownership and state; do not classify issues solely by a PR or commit title.
+- Keep older or already-clear issue prose intact unless an actual readability defect is identified. Bulk edits must not replace detailed evidence with generic summaries, erase release or security requirements, or alter a historical conclusion. If an issue's type is genuinely ambiguous, review its body before changing its title.
 
 ## 2. Triage: decide what work is valid
 
