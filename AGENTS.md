@@ -15,6 +15,8 @@ This repository holds organization-wide community health files for `cubrid-lab`.
 
 Follow [the organization writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md). All issue titles retain a type-only prefix such as `feat:`, `bug:`, `docs:`, `test:`, `chore:` or `ci:` (no module scope required), even when rewritten for readability. Audit existing titles and preserve history; PR titles and commits retain Conventional Commits as permitted by the local validator. Distinguish issue goals, triage decisions, PR evidence and CI checks; preserve repository-specific exceptions.
 
+For source comments, test names, PR descriptions, reviews and other explanatory text, follow [explanations in code, tests, reviews and agent-written text](docs/ISSUE_PR_COMMIT_STANDARD.md#6-explanations-in-code-tests-reviews-and-agent-written-text): explain what happens, why it matters and the constraint involved before any issue number or internal code.
+
 ## Working Rules
 - Treat this repo as policy and template infrastructure, not product code.
 - Keep contributor-facing guidance consistent across files.
@@ -267,5 +269,9 @@ documentation, presentations, and other maintainer-facing writing.
   separate lookup table. Edit an existing editable comment to correct unclear
   wording rather than adding redundant follow-up comments.
 
-This is a shared writing convention, not a new CI check, reviewer approval,
+This section covers maintainer-facing writing. The canonical rule for code
+comments, test names and review replies, with examples, how other
+repositories adopt it and a review checklist, is
+[section 6 of the writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md#6-explanations-in-code-tests-reviews-and-agent-written-text).
+It is a shared writing convention, not a new CI check, reviewer approval,
 or merge gate. Keep existing repository-specific technical and safety rules.

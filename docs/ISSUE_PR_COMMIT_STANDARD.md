@@ -49,3 +49,44 @@ Use Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`, `refactor:`, `chore
 ## 5. Human/agent parity
 
 Apply the same policy to humans, Codex, Claude Code, OpenCode and other agents. Keep instructions tool-neutral and grounded in repository evidence. Do not copy author-specific comments, reviewer names or AI-workflow narration into permanent issue prose unless attribution itself is materially necessary.
+
+## 6. Explanations in code, tests, reviews and agent-written text
+
+This is the canonical rule for explanatory prose written by people or agents: source-code comments, test names and test comments, examples, PR descriptions, review comments and replies, status comments and published explanations.
+
+- Explain **what happens, why it matters, and the invariant or constraint involved** in ordinary English. A reader should understand the comment or reply without opening a past PR, an issue thread, a scenario table or an agent's private notes.
+- An unexplained issue number, scenario or test-lane code (`S06`), `see above`, `as discussed`, or agent-only shorthand must not stand in for the explanation. Put the explanation first; add the identifier afterwards for traceability.
+- Issue numbers and identifiers are **not defects** by themselves. Keep machine-readable identifiers unchanged where they are part of code, test discovery, fixture names, artifact paths, error codes, structured data or exact evidence references.
+- Do not add comments that only restate self-explanatory code, and do not delete useful history. Revise existing text only where a real reader would be confused.
+
+Example:
+
+```go
+// Bad: the reason lives in another scenario and an issue thread.
+// A heartbeat status that was not answered observed nothing, as in S12 (#607).
+
+// Good: the behavior and the decision are explained; the IDs stay for traceability.
+// If the heartbeat command cannot reach a member or return its role, the
+// post-restart HA state cannot be observed. Report it as blocked rather than
+// failed unless another invariant violation was already seen (S06, #607).
+```
+
+A review reply such as `fixed per S12` is likewise incomplete; `The retry now stops after the cluster read succeeds, so a slow member no longer fails the whole check (S12)` can be checked by any maintainer.
+
+### Adoption by each repository
+
+- Changes to this file or to this repository's `AGENTS.md` are **not inherited automatically** by other repositories' `AGENTS.md` files, and no coding agent is guaranteed to read or follow them.
+- Each repository adopts the rule by linking this section from its own agent instructions (`AGENTS.md`, or the contributor guide it points to). Do not copy the whole policy; a short pointer plus any repository-specific notes is enough.
+- Repository-specific safety, build, release and content rules keep precedence. When maintaining local guidance, check it for conflicts with this section and resolve them in a normal PR.
+- This is a writing convention, not a CI check, bot, merge gate or required reviewer.
+
+### Review checklist
+
+Run through this by hand when writing or reviewing a new comment, test name, PR description or review reply:
+
+1. Does it say what happens or what was changed, in plain words?
+2. Does it say why: the reason, invariant or constraint?
+3. Can a maintainer new to the change understand it without opening another issue, PR, scenario table or agent log?
+4. Is every internal code or issue number explained in the same sentence, or kept only for traceability?
+5. Are machine-readable identifiers (test names used for discovery, fixtures, error codes, paths) left intact?
+6. Is the comment needed at all, or does the code already say it?
