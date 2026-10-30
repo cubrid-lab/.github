@@ -15,6 +15,8 @@ This repository holds organization-wide community health files for `cubrid-lab`.
 
 Follow [the organization writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md). All issue titles retain a type-only prefix such as `feat:`, `bug:`, `docs:`, `test:`, `chore:` or `ci:` (no module scope required), even when rewritten for readability. Audit existing titles and preserve history; PR titles and commits retain Conventional Commits as permitted by the local validator. Distinguish issue goals, triage decisions, PR evidence and CI checks; preserve repository-specific exceptions.
 
+For source comments, test names, PR descriptions, reviews and other explanatory text, follow [explanations in code, tests, reviews and agent-written text](docs/ISSUE_PR_COMMIT_STANDARD.md#6-explanations-in-code-tests-reviews-and-agent-written-text): explain what happens, why it matters and the constraint involved before any issue number or internal code.
+
 ## Working Rules
 - Treat this repo as policy and template infrastructure, not product code.
 - Keep contributor-facing guidance consistent across files.
@@ -236,3 +238,40 @@ repository's actual GitHub issue, PRs and maintainer guidance.
 
 - 작업 시작 전 GitHub Project Board 확인 → In Progress 상태 업데이트
 - 작업 완료 시 즉시 PR 생성 + Done 이동
+
+## Human-readable communication (all agents)
+
+Use this rule for text authored or edited by Codex, Claude Code, OpenCode,
+ChatGPT, Copilot, or any other agent. It applies to issues, PRs, reviews,
+comments, checklists, status updates, commit summaries, release notes,
+documentation, presentations, and other maintainer-facing writing.
+
+- Write for a reader unfamiliar with the underlying script, storyboard,
+  automation run, or agent plan. Name the actual project, component,
+  action, evidence, and location in ordinary, clear language.
+- Never use unexplained internal identifiers as reader-facing labels or
+  checklist instructions (for example, `H1, P1, C1, K1, F2` or `A1/B1/R1/R2`).
+  Do not substitute `P1`/`P2` for repository priority labels.
+- When an internal identifier is necessary for accurate cross-reference,
+  **describe the subject first**, then add the identifier in context:
+  `pycubrid introduction (0:20; storyboard shot P1)`. Use descriptive
+  names and timestamps, section titles, or paths wherever practical.
+- Use natural, actionable wording. Prefer `Listen to the full narration and
+  verify the pronunciation of each project name` to `Maintainer full listen`.
+  Avoid compressed task fragments, unexplained acronyms, and generated
+  process/status jargon.
+- Keep legitimate technical identifiers unchanged in code, tests, structured
+  data, logs, specifications, and exact evidence references. Issue numbers,
+  filenames, command names, APIs, error codes, and hashes are not prohibited.
+  Do not break machine-readable references to improve prose.
+- Before publishing, reread the text as a first-time maintainer. It should
+  state what happened or needs to happen, why, and where without requiring a
+  separate lookup table. Edit an existing editable comment to correct unclear
+  wording rather than adding redundant follow-up comments.
+
+This section covers maintainer-facing writing. The canonical rule for code
+comments, test names and review replies, with examples, how other
+repositories adopt it and a review checklist, is
+[section 6 of the writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md#6-explanations-in-code-tests-reviews-and-agent-written-text).
+It is a shared writing convention, not a new CI check, reviewer approval,
+or merge gate. Keep existing repository-specific technical and safety rules.
