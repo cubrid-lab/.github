@@ -90,3 +90,15 @@ Run through this by hand when writing or reviewing a new comment, test name, PR 
 4. Is every internal code or issue number explained in the same sentence, or kept only for traceability?
 5. Are machine-readable identifiers (test names used for discovery, fixtures, error codes, paths) left intact?
 6. Is the comment needed at all, or does the code already say it?
+
+## 7. Repository boundaries and legitimate external references
+
+Every repository owns its own technical design, issue backlog, pull requests, tests, support policy and release decisions. Before creating or reviewing an issue or PR:
+
+1. State the **local** problem, affected API or output, and evidence from the owning repository. Write the title and first paragraph so they remain accurate even if another repository is renamed, deleted or releases independently.
+2. Use the repository's actual language, framework, package manager and published compatibility contract. Do not transplant Python driver/ORM architecture into Go, Rust, TypeScript or Node.js documentation (or the reverse), or copy irrelevant language-specific checklist items.
+3. Keep ADR decisions, design approval, triage status, release notes and implementation work in the owning repository. A shared writing convention is not a shared architecture, common version number or cross-repository implementation mandate.
+4. Link external projects only where there is a **real tested dependency or public integration interface**, an authoritative specification, an independently validated comparison (for example CUBRID/JDBC behavior), or a specifically scoped coordination dependency. Explain its purpose; a link alone is not a requirement or proof that a test passed. Do not use automatic closing keywords for another repository's issues.
+5. Check new and edited issue/PR titles, bodies, ADRs, agent/contributor guidance and release notes for imported project names, unrelated toolchains, unsupported version assumptions and invented verification. Distinguish references used as optional research from evidence collected within the owning repository.
+
+This is a **manual writing/review convention**, not a new CI check or a prohibition on naming actual package dependencies. Each repository should incorporate a short local ownership note and language-appropriate PR checklist where needed; do not bulk-copy an identical technical template into every codebase. Existing repository-specific maintainer and CI gates are unchanged.
