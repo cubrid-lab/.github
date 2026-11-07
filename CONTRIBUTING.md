@@ -45,40 +45,27 @@ Before proposing a new CUBRID connector or adapter feature, see
 They distinguish database correctness from language-specific APIs; design and
 release decisions remain within each independent repository.
 
-## Development Setup
+## Development Setup and code style
 
-Each repository provides detailed setup instructions:
+Every repository controls its language-specific tools, runtime compatibility,
+tests, documentation and release process. Before changing code, consult
+the owning repository's `CONTRIBUTING.md`, manifests, build scripts and
+GitHub Actions workflows. Their actual commands override examples given here.
 
-- **Python projects**: See `DEVELOPMENT.md` (usually includes `make install`, `make test`, `make lint`)
-- **TypeScript projects**: See `README.md` (usually includes `npm install`, `npm test`, `npm run lint`)
-- **Go projects**: See `README.md` (usually includes `go test`, `go fmt`)
+The [language-specific development guide](docs/LANGUAGE_DEVELOPMENT_POLICY.md)
+lists entrypoints for all active organization repositories and explains
+idiomatic Python, TypeScript, Go, Rust, C/C++, Java, Terraform, Kubernetes
+Operator, docs-site, benchmark and generated-asset workflows.
 
-Typically, all projects include:
-- Automated linting and formatting
-- Pre-commit hooks (where applicable)
-- CI/CD validation on pull requests
+Do not assume Python always has the same Ruff or Mypy version, every
+TypeScript project uses ESLint/Prettier rather than Biome, or every
+repository includes a `make lint` or `npm run format` script. Use
+the tools, version pins and non-mutating CI checks that the repository
+**actually** defines. This common guidance does not mandate a new
+formatter, compiler, test framework or CI gate.
 
-## Code Style
-
-We follow language-specific conventions:
-
-### Python
-
-- Formatter: **Ruff** (target: 100-character line length)
-- Style: PEP 8 with type hints (PEP 561)
-- Tool: `make format` (or `ruff format` + `ruff check --fix`)
-
-### TypeScript
-
-- Formatter: **ESLint** + **Prettier**
-- Style: ES6+, strict typing, null coalescing
-- Tool: `npm run lint` / `npm run format`
-
-### Go
-
-- Formatter: **gofmt**
-- Style: idiomatic Go, interfaces over concrete types
-- Tool: `gofmt -w` or `make fmt`
+Also see the [change-impact CI policy](docs/CI_CHANGE_IMPACT_POLICY.md)
+for selecting sufficient tests without skipping safety-critical checks.
 
 ## Commit Convention
 
