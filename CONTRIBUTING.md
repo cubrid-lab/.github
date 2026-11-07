@@ -40,6 +40,11 @@ Use [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions) for:
 - Architecture discussions
 - Community ideas
 
+Before proposing a new CUBRID connector or adapter feature, see
+[language-native connector design principles](docs/LANGUAGE_NATIVE_CONNECTORS.md).
+They distinguish database correctness from language-specific APIs; design and
+release decisions remain within each independent repository.
+
 ## Development Setup
 
 Each repository provides detailed setup instructions:
