@@ -112,12 +112,14 @@ Current release versions: live badges in [`profile/README.md`](profile/README.md
 
 ## Translation Policy (cubrid-lab org)
 
-English is canonical. 한국어 (`docs/README.ko.md`) is **required-to-sync** — a PR
-changing `README.md` without it fails the `translation-sync` check (escape hatch:
-`translations-deferred` label). Other languages (de/hi/ru/zh) are community
-translations: drift emits a warning only; maintainers' AI agent opens resync PRs.
-This hard gate is time-boxed for the 2026 contest finals and should be relaxed to
-advisory afterwards (see the reminder issue).
+English `README.md` remains canonical. After the 2026 Open Source Developer
+Contest final evaluation (November 4–5), missing translations of that README —
+including Korean `docs/README.ko.md` — generate **advisory warnings only** in
+`translation-sync`. Contributors may update a translation in the same PR;
+maintainers may open resynchronization PRs later. The
+`translations-deferred` label is no longer a prerequisite for README drift.
+This does not relax separate required checks for the structure of Korean
+`docs/ko/` pages, documentation-sync coverage, or release/security gates.
 
 ## Roadmap Update Policy
 
@@ -165,8 +167,9 @@ its issue decisions and can adopt the same workflow independently.
 Source of truth: [`.github/labels.yml`](.github/labels.yml) — sync with
 `python scripts/sync_labels.py`, drift reported weekly by `label-audit`.
 Naming: lowercase, spaced-colon prefixes (`priority: high`, `size: S`,
-`area: packaging`). Escape-hatch labels (`docs-not-needed`,
-`translations-deferred`) share one color. `good first issue` and
+`area: packaging`). The active docs gate uses `docs-not-needed` as an exception;
+`translations-deferred` is retained for historical traceability but no
+longer bypasses the advisory README translation check. `good first issue` and
 `help wanted` are maintainer promises (scoping + mentoring), never
 auto-applied. Domain labels are repo-optional `area: ...` only.
 
