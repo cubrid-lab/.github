@@ -13,6 +13,9 @@ This repository holds organization-wide community health files for `cubrid-lab`.
 
 ## Issue, PR, and commit writing
 
+Repository boundary rule: [the writing standard's repository ownership section](docs/ISSUE_PR_COMMIT_STANDARD.md#7-repository-boundaries-and-legitimate-external-references) governs only **issue/PR prose and review clarity**. It does not turn `.github` into an architecture owner, a central release plan, or a cross-repository issue tracker. Each code repository retains its own technical decisions and evidence.
+
+
 Follow [the organization writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md). All issue titles retain a type-only prefix such as `feat:`, `bug:`, `docs:`, `test:`, `chore:` or `ci:` (no module scope required), even when rewritten for readability. Audit existing titles and preserve history; PR titles and commits retain Conventional Commits as permitted by the local validator. Distinguish issue goals, triage decisions, PR evidence and CI checks; preserve repository-specific exceptions.
 
 For source comments, test names, PR descriptions, reviews and other explanatory text, follow [explanations in code, tests, reviews and agent-written text](docs/ISSUE_PR_COMMIT_STANDARD.md#6-explanations-in-code-tests-reviews-and-agent-written-text): explain what happens, why it matters and the constraint involved before any issue number or internal code.
@@ -255,7 +258,7 @@ documentation, presentations, and other maintainer-facing writing.
   Do not substitute `P1`/`P2` for repository priority labels.
 - When an internal identifier is necessary for accurate cross-reference,
   **describe the subject first**, then add the identifier in context:
-  `pycubrid introduction (0:20; storyboard shot P1)`. Use descriptive
+  `repository overview (0:20; section 1)`. Use descriptive
   names and timestamps, section titles, or paths wherever practical.
 - Use natural, actionable wording. Prefer `Listen to the full narration and
   verify the pronunciation of each project name` to `Maintainer full listen`.
