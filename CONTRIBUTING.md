@@ -153,6 +153,11 @@ No contributor is required to install or obtain a review from a particular AI to
    applicable. Keep existing branch protections; adjust them only via an
    intentional, separately reviewed repository-specific change.
 
+For CI changes, follow the [change-impact validation standard](docs/CI_CHANGE_IMPACT_POLICY.md)
+and preserve the repository's required status checks before optimizing path
+selection. Document any full-validation exception and test docs-only PRs as
+well as runtime-risk PRs.
+
 Each repository documents its own test commands and risk-sensitive paths. The
 **review criteria** stay the same across repositories, even when CI runner
 infrastructure differs. Use squash merge where repository rulesets prescribe it.
