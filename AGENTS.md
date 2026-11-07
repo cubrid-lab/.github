@@ -112,12 +112,13 @@ Current release versions: live badges in [`profile/README.md`](profile/README.md
 
 ## Translation Policy (cubrid-lab org)
 
-English is canonical. 한국어 (`docs/README.ko.md`) is **required-to-sync** — a PR
-changing `README.md` without it fails the `translation-sync` check (escape hatch:
-`translations-deferred` label). Other languages (de/hi/ru/zh) are community
-translations: drift emits a warning only; maintainers' AI agent opens resync PRs.
-This hard gate is time-boxed for the 2026 contest finals and should be relaxed to
-advisory afterwards (see the reminder issue).
+English `README.md` is canonical. In repositories using the `translation-sync`
+check, Korean `docs/README.ko.md` is **required-to-sync**: a PR changing the
+English README without updating the Korean translation fails the check unless
+a maintainer explicitly approves the `translations-deferred` label and records
+a follow-up. Other languages (de/hi/ru/zh) are community translations: drift
+emits advisory warnings and can be addressed in separate translation PRs.
+This policy is based on documentation quality and is not tied to an event date.
 
 ## Roadmap Update Policy
 

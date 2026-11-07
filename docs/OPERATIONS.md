@@ -38,7 +38,7 @@ Known gotchas (both fixed in the workflows, kept here as memory):
 | Gate | Workflow / job | Blocks on | Escape hatch |
 |---|---|---|---|
 | Docs sync | `docs-sync` | behavior change without README/CHANGELOG/docs update | `docs-not-needed` label or `Docs: not needed - <reason>` in PR body |
-| Translation sync | `translation-sync` (in docs-sync) | `README.md` changed without `docs/README.ko.md` (한국어 is required until the 2026 contest finals; de/hi/ru/zh warn only) | `translations-deferred` label |
+| Translation sync | `translation-sync` (in docs-sync) | `README.md` changed without `docs/README.ko.md` (Korean required; de/hi/ru/zh warn only) | Maintainer-approved `translations-deferred` label, with recorded follow-up |
 | Changelog lint | mcp-server `ci.yml` | missing/undated `[Unreleased]`/version sections | none (fix the changelog) |
 | Integration matrices | pycubrid/sqlalchemy (Python × CUBRID 10.2–11.4), mcp-server (CUBRID 11.2+11.4), cookbook smoke (`make verify` goldens, 11.2+11.4) | live-DB test failure | none; infra flakes → re-run |
 | CI gate / matrix-result | summary jobs | any leg failed | none |
@@ -52,7 +52,7 @@ Source of truth: [`.github/labels.yml`](../.github/labels.yml) · sync: `python 
 
 ## Translations
 
-Policy in [AGENTS.md](../AGENTS.md#translation-policy-cubrid-lab-org): English canonical; 한국어 required-to-sync (hard gate, time-boxed for the contest — relax after 2026 finals, see the reminder issue); de/hi/ru/zh community translations with advisory drift warnings and maintainer-side resync PRs. Every translated file carries a sync marker blockquote.
+Policy in [AGENTS.md](../AGENTS.md#translation-policy-cubrid-lab-org): English README is canonical; Korean README translation synchronization is required, with a maintainer-approved, recorded `translations-deferred` exception. de/hi/ru/zh remain community translations with advisory drift warnings and optional follow-up PRs. This policy does not depend on contest dates. Every translated file carries a sync marker blockquote.
 
 ## Licensing & attribution (verified 2026-09)
 
