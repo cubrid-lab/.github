@@ -94,7 +94,6 @@ They are **not organization-wide contribution prerequisites, active issue
 triage gates or restrictions on independent repository work**. Preserve the
 history, but use current repository-specific issues and requirements for work.
 
-> **Board**: [CUBRID Ecosystem Roadmap](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only)
 
 ### What This Is
 
@@ -122,17 +121,6 @@ a maintainer explicitly approves the `translations-deferred` label and records
 a follow-up. Other languages (de/hi/ru/zh) are community translations: drift
 emits advisory warnings and can be addressed in separate translation PRs.
 This policy is based on documentation quality and is not tied to an event date.
-
-## Roadmap Update Policy
-
-The ecosystem roadmap (`ROADMAP.md`) is a living document. It MUST be updated:
-- **On every release** — version bump + status change in the same PR as the release
-- **On every significant feature** — new items in the "Now" section of the feature PR
-- **On milestone completion** — move from "Next" to "Now" to completed
-
-If a PR changes public behavior, adds features, or bumps versions, the PR body must
-include `Roadmap: updated` or `Roadmap: not needed - <reason>`.
-This is enforced by code review, not CI (roadmap changes require human judgment).
 
 ## Operations Manual
 
@@ -240,8 +228,8 @@ repository's actual GitHub issue, PRs and maintainer guidance.
 
 ### Daily Sync
 
-- 작업 시작 전 GitHub Project Board 확인 → In Progress 상태 업데이트
-- 작업 완료 시 즉시 PR 생성 + Done 이동
+- 작업 시작 전 담당 저장소의 Issues 및 Milestones 확인
+- 작업 완료 시 PR 생성 및 해당 Issue 상태 업데이트
 
 ## Human-readable communication (all agents)
 
