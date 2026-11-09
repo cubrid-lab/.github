@@ -74,7 +74,7 @@ Example:
 
 A review reply such as `fixed per S12` is likewise incomplete; `The retry now stops after the cluster read succeeds, so a slow member no longer fails the whole check (S12)` can be checked by any maintainer.
 
-### Adoption by each repository
+### Historical adoption notes
 
 - Changes to this file or to this repository's `AGENTS.md` are **not inherited automatically** by other repositories' `AGENTS.md` files, and no coding agent is guaranteed to read or follow them.
 - No repository needs to adopt or link this archived document. Each repository defines its own contributor and explanatory-text expectations, independently of these examples.
@@ -102,4 +102,4 @@ Every repository owns its own technical design, issue backlog, pull requests, te
 4. Link external projects only where there is a **real tested dependency or public integration interface**, an authoritative specification, an independently validated comparison (for example CUBRID/JDBC behavior), or a specifically scoped coordination dependency. Explain its purpose; a link alone is not a requirement or proof that a test passed. Do not use automatic closing keywords for another repository's issues.
 5. Check new and edited issue/PR titles, bodies, ADRs, agent/contributor guidance and release notes for imported project names, unrelated toolchains, unsupported version assumptions and invented verification. Distinguish references used as optional research from evidence collected within the owning repository.
 
-This is a **manual writing/review convention**, not a new CI check or a prohibition on naming actual package dependencies. Each repository should incorporate a short local ownership note and language-appropriate PR checklist where needed; do not bulk-copy an identical technical template into every codebase. Existing repository-specific maintainer and CI gates are unchanged.
+These were historical writing suggestions, not a CI gate or a prohibition on naming actual package dependencies. Each repository independently determines its own review instructions and language-appropriate checks. Existing local maintainer and CI gates remain unchanged.
