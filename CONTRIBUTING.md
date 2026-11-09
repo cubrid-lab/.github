@@ -139,9 +139,9 @@ No contributor is required to install or obtain a review from a particular AI to
 
 For CI changes in this repository, verify its own required status checks and safe behavior. CI changes in another repository must be assessed against that repository's actual workflows, supported tests and permissions.
 
-Each repository documents its own test commands and risk-sensitive paths. The
-**review criteria** stay the same across repositories, even when CI runner
-infrastructure differs. Use squash merge where repository rulesets prescribe it.
+Each repository defines its own review criteria and test commands. Do not
+assume its required checks, branch rules, merge method or publication controls
+match this repository's settings.
 
 Tool attribution is optional and should be factual; add a coauthor trailer only
 for a real contributor and only when permitted by the target project. Do not
