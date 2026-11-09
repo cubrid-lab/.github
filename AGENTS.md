@@ -222,7 +222,7 @@ repository's actual GitHub issue, PRs and maintainer guidance.
 - 작업 시작 전 담당 저장소의 Issues 및 Milestones 확인
 - 작업 완료 시 PR 생성 및 해당 Issue 상태 업데이트
 
-## Human-readable communication (all agents)
+## Human-readable communication (for this repository)
 
 Use this rule for text authored or edited by Codex, Claude Code, OpenCode,
 ChatGPT, Copilot, or any other agent. It applies to issues, PRs, reviews,
@@ -252,9 +252,6 @@ documentation, presentations, and other maintainer-facing writing.
   separate lookup table. Edit an existing editable comment to correct unclear
   wording rather than adding redundant follow-up comments.
 
-This section covers maintainer-facing writing. The canonical rule for code
-comments, test names and review replies, with examples, how other
-repositories adopt it and a review checklist, is
-[section 6 of the writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md#6-explanations-in-code-tests-reviews-and-agent-written-text).
-It is a shared writing convention, not a new CI check, reviewer approval,
-or merge gate. Keep existing repository-specific technical and safety rules.
+The guidance above applies to explanatory writing in **this repository only**.
+The former [organization writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md) is
+historical and does not govern other repositories or add CI/reviewer gates.
