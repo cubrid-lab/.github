@@ -1,10 +1,10 @@
 # Contributing to CUBRID Labs
 
-Thank you for your interest in contributing to CUBRID Labs! We welcome contributions from the community in the form of bug reports, feature requests, code contributions, documentation, and more.
+Thank you for contributing to CUBRID Lab. This repository maintains the organization's GitHub community defaults and public profile. GitHub can use supported community files as fallbacks where a project has no local version, but **engineering policies and agent instructions here are not inherited**. Always use the target project's own contribution, test and release requirements.
 
 ## Issue, PR, and commit titles
 
-See [the shared writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md): All issues use a type-only goal/problem prefix (`feat:`, `bug:`, `docs:`, `test:`, `chore:`, `ci:` as appropriate), without required module scopes. Keep the prefix when making a title easier to read, and audit existing issues without erasing evidence or history. PRs and commits use Conventional Commits, subject to repository-specific PR validators. Use reproducible evidence and verifiable acceptance criteria for issues; use actual changes and test results for PRs. Triage owns validity, relative priority and size, while CI owns syntactic checks and code quality gates.
+For issues and PRs **in this repository**, use a descriptive type-only issue title (`docs:`, `bug:`, `ci:`, etc.) and a clear PR title matching the actual change. Include evidence, local validation and measurable acceptance criteria. Other repositories own their issue and PR formats and the checks that enforce them. The prior [cross-repository writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md) is historical, not a requirement.
 
 ## How to Contribute
 
@@ -40,10 +40,7 @@ Use [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions) for:
 - Architecture discussions
 - Community ideas
 
-Before proposing a new CUBRID connector or adapter feature, see
-[language-native connector design principles](docs/LANGUAGE_NATIVE_CONNECTORS.md).
-They distinguish database correctness from language-specific APIs; design and
-release decisions remain within each independent repository.
+For background on connector styles, the [language-native connector notes](docs/LANGUAGE_NATIVE_CONNECTORS.md) are optional reading, not a cross-repository design requirement. Design and release decisions belong to the owning project.
 
 ## Development Setup and code style
 
@@ -52,10 +49,7 @@ tests, documentation and release process. Before changing code, consult
 the owning repository's `CONTRIBUTING.md`, manifests, build scripts and
 GitHub Actions workflows. Their actual commands override examples given here.
 
-The [language-specific development guide](docs/LANGUAGE_DEVELOPMENT_POLICY.md)
-lists entrypoints for all active organization repositories and explains
-idiomatic Python, TypeScript, Go, Rust, C/C++, Java, Terraform, Kubernetes
-Operator, docs-site, benchmark and generated-asset workflows.
+The [language-specific repository index](docs/LANGUAGE_DEVELOPMENT_POLICY.md) may help locate project instructions, but it does not override any repository's own toolchain or release procedure.
 
 Do not assume Python always has the same Ruff or Mypy version, every
 TypeScript project uses ESLint/Prettier rather than Biome, or every
@@ -64,12 +58,11 @@ the tools, version pins and non-mutating CI checks that the repository
 **actually** defines. This common guidance does not mandate a new
 formatter, compiler, test framework or CI gate.
 
-Also see the [change-impact CI policy](docs/CI_CHANGE_IMPACT_POLICY.md)
-for selecting sufficient tests without skipping safety-critical checks.
+The former [change-impact CI policy](docs/CI_CHANGE_IMPACT_POLICY.md) is historical. Each repository chooses and verifies its own risk-appropriate CI selection.
 
 ## Commit Convention
 
-Follow this format for all commits:
+For commits to this `.github` repository, use:
 
 ```
 <type>: <description>
@@ -117,8 +110,7 @@ Issue templates/automation and exceptions belong to the individual repository.
 
 ## Pull Request Process
 
-The same process applies to all contributions regardless of implementation tool
-(human-authored, OpenCode, Codex, Claude Code, Copilot, ChatGPT, or other agents).
+The process below applies to contributions **to this repository**, regardless of implementation tool (human-authored or AI-assisted). Other repositories have their own PR processes.
 No contributor is required to install or obtain a review from a particular AI tool.
 
 1. **Create a focused PR.** Describe why the change is needed, what it changes,
@@ -145,14 +137,11 @@ No contributor is required to install or obtain a review from a particular AI to
    applicable. Keep existing branch protections; adjust them only via an
    intentional, separately reviewed repository-specific change.
 
-For CI changes, follow the [change-impact validation standard](docs/CI_CHANGE_IMPACT_POLICY.md)
-and preserve the repository's required status checks before optimizing path
-selection. Document any full-validation exception and test docs-only PRs as
-well as runtime-risk PRs.
+For CI changes in this repository, verify its own required status checks and safe behavior. CI changes in another repository must be assessed against that repository's actual workflows, supported tests and permissions.
 
-Each repository documents its own test commands and risk-sensitive paths. The
-**review criteria** stay the same across repositories, even when CI runner
-infrastructure differs. Use squash merge where repository rulesets prescribe it.
+Each repository defines its own review criteria and test commands. Do not
+assume its required checks, branch rules, merge method or publication controls
+match this repository's settings.
 
 Tool attribution is optional and should be factual; add a coauthor trailer only
 for a real contributor and only when permitted by the target project. Do not

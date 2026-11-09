@@ -1,9 +1,7 @@
 # Change-impact-based CI policy
 
-This standard applies to every active CUBRID Lab repository. It describes the
-**outcome** that must be preserved, not one shared workflow implementation. Each
-repository owns its own language-specific jobs, dependencies, runtime versions,
-and security/release gates.
+> [!CAUTION]
+> **Historical proposal only; no organization-wide CI requirement.** The former shared change-impact policy was discontinued in [#74](https://github.com/cubrid-lab/.github/issues/74). Each repository defines and verifies its own CI path selection, required checks, live-test safety and release requirements. The examples below are retained temporarily for reference and do not authorize changes to other repositories.
 
 ## Principle
 
