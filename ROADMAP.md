@@ -6,7 +6,7 @@
 > Milestones are authoritative for "next release" scope.
 > This document is authoritative for direction, priorities, and cross-repo dependencies.
 >
-> 📋 [**Org Project Board**](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only) · See [individual repo milestones](#release-focus-by-repo) for execution details.
+> See [individual repo milestones](#release-focus-by-repo) for execution details.
 
 ---
 
@@ -157,7 +157,6 @@ We welcome contributions to any repo in the ecosystem!
 - 🐛 **Found a bug?** Open an issue on the relevant repo
 - 💡 **Have a feature idea?** Start a [Discussion](https://github.com/orgs/cubrid-lab/discussions)
 - 🔧 **Want to contribute code?** See [CONTRIBUTING.md](CONTRIBUTING.md) and look for `good first issue` labels
-- 📋 **Track progress**: [Org Project Board](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only)
 
 ---
 
