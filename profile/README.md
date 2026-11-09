@@ -83,12 +83,6 @@ Version badges show each project's latest published release (PyPI, npm or GitHub
 
 ---
 
-## Roadmap
-
-See the **[Ecosystem Roadmap](https://github.com/cubrid-lab/.github/blob/main/ROADMAP.md)** for cross-repo priorities and timeline.
-
-Track execution per-repo via the [milestones linked in ROADMAP.md](https://github.com/cubrid-lab/.github/blob/main/ROADMAP.md#release-focus-by-repo).
-
 ---
 
 ## Getting Started
@@ -114,7 +108,6 @@ We welcome contributions! Please see [CONTRIBUTING.md](https://github.com/cubrid
 - 💬 Questions? Post in [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions)
 - 🐛 Found a bug? Open an issue on the relevant repo
 - 📝 Have an idea? Start a [Discussion](https://github.com/orgs/cubrid-lab/discussions)
-- 📋 Track progress: [Project Board](https://github.com/orgs/cubrid-lab/projects/2) (maintainers only)
 
 ---
 
