@@ -1,8 +1,11 @@
 # cubrid-lab Conventions & Operations Manual
 
+> [!CAUTION]
+> **Historical reference — not an active release runbook.** This document describes an earlier process and must not be used to create tags, publish packages, or modify CI in today's product repositories. Each repository's own `RELEASING.md` (where present), contributor instructions, and current GitHub Actions workflows are the authority. Retain this page temporarily while repository-local guidance and links are migrated; see [#84](https://github.com/cubrid-lab/.github/issues/84).
+
 How the four Python ecosystem repos (pycubrid, sqlalchemy-cubrid,
 cubrid-mcp-server, cubrid-cookbook-python) are released, verified, and
-maintained. Everything here was learned the hard way — treat it as binding.
+maintained. This is a dated record of an earlier workflow, not a binding policy.
 
 ## Roles
 

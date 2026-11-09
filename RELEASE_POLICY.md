@@ -1,6 +1,9 @@
 # Release Policy
 
-This document defines the standard release process for all cubrid-lab product repositories. Apply it consistently across `pycubrid`, `sqlalchemy-cubrid`, `cubrid-cookbook-python`, and future repos.
+> [!CAUTION]
+> **Deprecated as an organization-wide release policy.** This Python-oriented checklist is preserved temporarily for historical links only. Do not run its manual tag/publish commands or apply its Python, roadmap, or milestone requirements to another repository. Follow that repository's own release instructions and live CI/publishing workflow. See [#84](https://github.com/cubrid-lab/.github/issues/84) for safe migration and retirement.
+
+This document records an older checklist; it does not set the current release process for any product repository.
 
 ## Pre-release checklist
 
