@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## Purpose
-This repository holds organization-wide community health files for `cubrid-lab`.
+This repository owns CUBRID Lab's GitHub community-health defaults, organization profile, and their local maintenance. Its `AGENTS.md` is **not inherited by other repositories**. An individual repository's own contributor, engineering, CI, release and security instructions are authoritative for that repository.
 
 ## Read First
 - `README.md`
@@ -9,28 +9,22 @@ This repository holds organization-wide community health files for `cubrid-lab`.
 - `SECURITY.md`
 - `SUPPORT.md`
 - `docs/agent-playbook.md`
-- `docs/ISSUE_PR_COMMIT_STANDARD.md`
 
 ## Issue, PR, and commit writing
 
-Repository boundary rule: [the writing standard's repository ownership section](docs/ISSUE_PR_COMMIT_STANDARD.md#7-repository-boundaries-and-legitimate-external-references) governs only **issue/PR prose and review clarity**. It does not turn `.github` into an architecture owner, a central release plan, or a cross-repository issue tracker. Each code repository retains its own technical decisions and evidence.
-
-
-Follow [the organization writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md). All issue titles retain a type-only prefix such as `feat:`, `bug:`, `docs:`, `test:`, `chore:` or `ci:` (no module scope required), even when rewritten for readability. Audit existing titles and preserve history; PR titles and commits retain Conventional Commits as permitted by the local validator. Distinguish issue goals, triage decisions, PR evidence and CI checks; preserve repository-specific exceptions.
-
-For source comments, test names, PR descriptions, reviews and other explanatory text, follow [explanations in code, tests, reviews and agent-written text](docs/ISSUE_PR_COMMIT_STANDARD.md#6-explanations-in-code-tests-reviews-and-agent-written-text): explain what happens, why it matters and the constraint involved before any issue number or internal code.
+For changes **to this `.github` repository**, follow its [CONTRIBUTING.md](CONTRIBUTING.md). Use clear issue titles, self-contained evidence, focused pull requests and the checks actually configured here. Do not apply local title or triage conventions automatically to another repository. The former [organization writing guide](docs/ISSUE_PR_COMMIT_STANDARD.md) is kept only as historical reference until outstanding links are migrated.
 
 ## Working Rules
-- Treat this repo as policy and template infrastructure, not product code.
+- Treat this repository as GitHub community defaults, organization profile and template infrastructure, not as authority for product engineering or releases.
 - Keep contributor-facing guidance consistent across files.
 - When behavior or policy changes, update every affected document in the same change.
 - Prefer small edits that preserve existing wording unless a policy change is intentional.
 
-## Development Workflow (cubrid-lab org standard)
+## Development Workflow (this repository)
 
-Every contribution follows the same review and merge process, **regardless of
-whether code was written by a person, OpenCode, Codex, Claude Code, ChatGPT,
-Copilot, or another agent**. The canonical policy is in
+For work **in this repository**, use the following review and merge process
+regardless of whether the change was written by a person or an AI tool.
+The local instructions are in
 [CONTRIBUTING.md](CONTRIBUTING.md#pull-request-process).
 
 1. **Scope and implementation** — Keep an issue/PR focused. Include tests and
@@ -57,10 +51,9 @@ reviewed PR.
 
 ## Issue intake and autonomous agent work
 
-The rules here describe a **shared decision process**, not a mandatory
-cross-repository tool or a new CI gate. Each repository's own `AGENTS.md`,
-`CONTRIBUTING.md`, tests, code ownership and safety/release rules determine
-the actual implementation commands and any additional approvals.
+These intake instructions describe issues in **this `.github` repository only**.
+Other repositories maintain their own issue intake, implementation and approval
+rules, using their own `AGENTS.md`, `CONTRIBUTING.md` and GitHub settings.
 
 - **Before filing:** verify the problem against current code, open/recently
   closed issues and overlapping PRs. File a focused, testable issue only in
@@ -85,7 +78,7 @@ the actual implementation commands and any additional approvals.
 
 ## Validation
 - Manually review Markdown rendering and link targets.
-- If examples or command snippets change, verify they still match current org conventions.
+- If examples or command snippets change, verify they match this repository's active checks and do not claim authority over other repositories.
 
 ## Historical project context — Performance Loop System
 
@@ -112,9 +105,9 @@ Current release versions: live badges in [`profile/README.md`](profile/README.md
 | `cubrid-mcp-server` | MCP server (LLM ↔ CUBRID) | 0.x beta on PyPI — **11 read-only tools plus opt-in `execute_write`, read-only whitelist + opt-in write mode, multi-connection, audit log, docs site live** |
 | `cubrid-cookbook` | Runnable examples across all languages | Python: **68 examples, 45 CI golden-verified on CUBRID 11.2 + 11.4**, one-command dashboard template; other languages planned |
 
-## Translation Policy (cubrid-lab org)
+## Translation checks in participating repositories (informational)
 
-English `README.md` is canonical. In repositories using the `translation-sync`
+Each repository owns its own translation policy. Where a repository explicitly uses the `translation-sync`
 check, Korean `docs/README.ko.md` is **required-to-sync**: a PR changing the
 English README without updating the Korean translation fails the check unless
 a maintainer explicitly approves the `translations-deferred` label and records
@@ -122,11 +115,9 @@ a follow-up. Other languages (de/hi/ru/zh) are community translations: drift
 emits advisory warnings and can be addressed in separate translation PRs.
 This policy is based on documentation quality and is not tied to an event date.
 
-## Operations Manual
+## Historical operations notes
 
-Releases, docs sites, CI gates, secrets, and the gotchas behind them:
-[docs/OPERATIONS.md](docs/OPERATIONS.md). Update it in the same PR that
-changes any release/docs/CI convention.
+The former [operations manual](docs/OPERATIONS.md) describes superseded release and CI practices. Do not use it to publish packages or govern another repository. Changes to release, docs and CI behavior belong in the affected repository's own current instructions and workflows.
 
 ## Issue intake and maintainer triage
 
@@ -152,7 +143,7 @@ These issue-management rules do not change the organization label catalog
 or authorize cross-repository master trackers. Every other repository owns
 its issue decisions and can adopt the same workflow independently.
 
-## Label Rules (cubrid-lab org)
+## Organization label catalog (explicitly synchronized, not inherited)
 
 Source of truth: [`.github/labels.yml`](.github/labels.yml) — sync with
 `python scripts/sync_labels.py`, drift reported weekly by `label-audit`.
