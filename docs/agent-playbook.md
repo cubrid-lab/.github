@@ -8,14 +8,14 @@
 
 ## Repository Map
 - `profile/` contains the public organization profile.
-- Root Markdown files define shared contributor guidance used across repositories.
+- Root community files provide GitHub-supported fallback templates where applicable; this repository's agent and engineering documents are not inherited by other repositories.
 
 ## Change Workflow
-1. Read the existing policy files before editing wording.
+1. Read this repository's active community files and distinguish them from historical engineering policy notes.
 2. Keep terminology consistent across all community files.
-3. If you add a new policy, update the most relevant existing document instead of creating redundant guidance.
+3. Keep changes scoped to this repository; do not add central policies that purport to govern product repositories.
 4. Check for broken links and obvious formatting regressions before committing.
-5. Apply the unified PR process from root CONTRIBUTING.md without introducing tool-specific mandatory Oracle/Copilot review routes; use actual repo CI commands and keep security/release safeguards.
+5. For this repository, follow root CONTRIBUTING.md and its own CI/security checks. Other repositories retain their own review, CI and release safeguards.
 
 ## Validation
 - Review Markdown files with `rg -n '^#|^##|^###' *.md profile/README.md`.
