@@ -49,7 +49,7 @@ Version badges show each project's latest published release (PyPI, npm or GitHub
 
 | Repository | Role | Version | Description | Status |
 |---|---|---|---|---|
-| **[cubrid-client](https://github.com/cubrid-lab/cubrid-client)** | Driver | [![npm](https://img.shields.io/npm/v/cubrid-client)](https://www.npmjs.com/package/cubrid-client) ![stable](https://img.shields.io/badge/-stable-brightgreen) | TypeScript-first async client | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/cubrid-client/ci.yml?label=tests)](https://github.com/cubrid-lab/cubrid-client/actions) |
+| **[cubrid-client](https://github.com/cubrid-lab/cubrid-client)** | Driver | [![npm](https://img.shields.io/npm/v/cubrid-client)](https://www.npmjs.com/package/cubrid-client) ![beta](https://img.shields.io/badge/-beta-blue) | TypeScript-first async client; production readiness under review ([release criteria](https://github.com/cubrid-lab/cubrid-client/issues/120)) | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/cubrid-client/ci.yml?label=tests)](https://github.com/cubrid-lab/cubrid-client/actions) |
 | **[drizzle-cubrid](https://github.com/cubrid-lab/drizzle-cubrid)** | ORM | [![npm](https://img.shields.io/npm/v/drizzle-cubrid)](https://www.npmjs.com/package/drizzle-cubrid) ![beta](https://img.shields.io/badge/-beta-blue) | Drizzle ORM dialect with type-safe schema | [![Tests](https://img.shields.io/github/actions/workflow/status/cubrid-lab/drizzle-cubrid/ci.yml?label=tests)](https://github.com/cubrid-lab/drizzle-cubrid/actions) |
 
 ### Go
