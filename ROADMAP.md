@@ -1,4 +1,4 @@
-# CUBRID Labs — Ecosystem Roadmap
+# CUBRID Lab — Ecosystem Roadmap
 
 > **Last updated**: 2026-10-13
 >

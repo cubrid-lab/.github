@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in any CUBRID Labs project, **please do not open a public issue**. Instead, follow one of these secure reporting methods:
+If you discover a security vulnerability in any CUBRID Lab project, **please do not open a public issue**. Instead, follow one of these secure reporting methods:
 
 ### Option 1: GitHub Security Advisories (Preferred)
 
@@ -46,7 +46,7 @@ Check individual repository documentation for specific version support policies.
 
 ## Security Best Practices
 
-When using CUBRID Labs projects:
+When using CUBRID Lab projects:
 
 1. **Keep dependencies updated** — Regularly update the driver/ORM to the latest version
 2. **Use TLS for connections** — Always encrypt database connections in production

@@ -1,4 +1,4 @@
-# Contributing to CUBRID Labs
+# Contributing to CUBRID Lab
 
 Thank you for contributing to CUBRID Lab. This repository maintains the organization's GitHub community defaults and public profile. GitHub can use supported community files as fallbacks where a project has no local version, but **engineering policies and agent instructions here are not inherited**. Always use the target project's own contribution, test and release requirements.
 
@@ -161,7 +161,7 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. We 
 - 💬 Post in [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions)
 - 📧 Contact maintainers via the issue tracker
 
-Thank you for contributing to CUBRID Labs!
+Thank you for contributing to CUBRID Lab!
 
 ## Finding Work (labels)
 
