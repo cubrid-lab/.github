@@ -1,6 +1,6 @@
 # Getting Help
 
-We're here to help! Here's where to find support for CUBRID Labs projects.
+We're here to help! Here's where to find support for CUBRID Lab projects.
 
 ## GitHub Discussions
 
@@ -8,7 +8,7 @@ We're here to help! Here's where to find support for CUBRID Labs projects.
 
 [GitHub Discussions](https://github.com/orgs/cubrid-lab/discussions)
 
-- **Q&A**: Ask questions about using any CUBRID Labs project
+- **Q&A**: Ask questions about using any CUBRID Lab project
 - **Ideas**: Suggest improvements or new features
 - **General**: Off-topic discussions and announcements
 - **Show & Tell**: Share projects built with CUBRID
@@ -58,4 +58,4 @@ All interactions follow our [Code of Conduct](CODE_OF_CONDUCT.md). We're committ
 
 ---
 
-**Thank you for being part of CUBRID Labs!** 🚀
+**Thank you for being part of CUBRID Lab!** 🚀
