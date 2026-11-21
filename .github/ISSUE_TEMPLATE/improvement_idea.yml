@@ -1,0 +1,40 @@
+name: Improvement Idea
+description: Share a confusing step, missing example or test, rough edge, or suggestion; no solution required.
+labels: ["status: needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A short observation is enough. You do not need a fix, full reproduction,
+        design, or acceptance criteria to suggest an improvement.
+        Use the repository that owns the affected code or docs and search for
+        duplicates when practical. Maintainers review scope, priority, evidence,
+        and acceptance before any implementation is scheduled.
+        Give your issue a descriptive English title; use the project's type
+        prefix (e.g. docs:, test:, feat:) if you know it.
+        Never post passwords, tokens, private logs, customer data, or
+        vulnerability details. Use the project's private security route.
+        Submitting an idea does not bypass the project's design, assignment,
+        code review, testing, or release safeguards.
+  - type: textarea
+    id: observation
+    attributes:
+      label: What did you notice?
+      description: What was confusing, missing, awkward, slow, or worth improving?
+      placeholder: "I tried ... and noticed ..."
+    validations:
+      required: true
+  - type: textarea
+    id: location
+    attributes:
+      label: Where did you notice it? (optional)
+      description: Link a page, file or command, and share a version if you know it.
+    validations:
+      required: false
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What would help? (optional)
+      description: Describe a better outcome or idea. It is fine not to know the solution.
+    validations:
+      required: false

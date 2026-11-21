@@ -2,6 +2,38 @@
 
 Thank you for contributing to CUBRID Lab. This repository maintains the organization's GitHub community defaults and public profile. GitHub can use supported community files as fallbacks where a project has no local version, but **engineering policies and agent instructions here are not inherited**. Always use the target project's own contribution, test and release requirements.
 
+
+## Share improvement ideas and credit problem discovery
+
+We welcome observations from people **using** CUBRID Lab projects, not only PRs
+implementing prewritten issues. Confusing onboarding, unclear documentation,
+missing test cases, unexpected behavior, accessibility concerns, and rough
+edges are all useful reports. Select **Improvement Idea** from the
+[repository's New issue chooser](https://github.com/cubrid-lab/.github/issues/new/choose)
+when this repository owns the problem. A short observation is enough; you do
+not need to know the root cause, propose code, or write acceptance criteria.
+Other repositories inherit the organization form only when they do not have
+their own issue templates.
+
+Search for an existing report when practical and avoid posting passwords,
+customer information, private logs, or vulnerability details. Maintainers
+triage duplicates and establish evidence, priority, scope, and completion
+criteria **before** authorizing implementation. Filing a proposal is not
+approval for a new API, release, security, or feature scope. Where a project's
+rules permit a small, self-contained documentation or bug-fix PR directly,
+**do not create a separate issue solely as a prerequisite**. Existing
+repository-specific ownership and safety rules remain in effect.
+
+**Credit discovery as well as implementation.** When a reported problem leads
+to a PR, reviewers should link the original issue and acknowledge its
+verified reporter as a **reporter**, separate from the code author or reviewer.
+For curated release notes, credit verified implementation contributors using
+the owning project's established rules; mention a verified issue reporter
+separately when relevant and permitted (for example, `reported by @handle`),
+never by mislabeling them as the implementation author. Do not invent
+attribution, infer a person's identity from an account name, or add compulsory
+credit boilerplate to every change.
+
 ## Issue, PR, and commit titles
 
 For issues and PRs **in this repository**, use a descriptive type-only issue title (`docs:`, `bug:`, `ci:`, etc.) and a clear PR title matching the actual change. Include evidence, local validation and measurable acceptance criteria. Other repositories own their issue and PR formats and the checks that enforce them. The prior [cross-repository writing standard](docs/ISSUE_PR_COMMIT_STANDARD.md) is historical, not a requirement.
